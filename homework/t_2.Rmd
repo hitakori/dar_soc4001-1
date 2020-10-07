@@ -1,6 +1,6 @@
 ---
 title: "SOC4001 Procesamiento avanzado de bases de datos en R"
-author: "Tarea 1"
+author: "Tarea 2"
 output:
   pdf_document: default
   html_document:
@@ -18,7 +18,12 @@ Entrega: Desde el momento de entrega, los estudiantes tiene 1 exacta semana de p
 Formato: Desarrollar esta tarea en un RScript, agregando comentarios cuando sea necesario. 
 
 
-1) Instalar y cargar el paquete (desde el Script) `CarData`.
+1) Descargar subconjunto de datos de la European Social Survey 2008 desde:  https://github.com/mebucca/Introduction-to-R/blob/master/data/ESS8_subset.dta
+
+2) Descargar y descomprimir template de workflow visto en clase desde: https://github.com/mebucca/dar_soc4001/blob/master/slides/class_4/workflow.zip
+
+
+
 
 
 2) Usa la documentación del paquete `CarData` para identificar los datos correspondientes a "Duncan's Occupational Prestige Data"
