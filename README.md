@@ -5,12 +5,12 @@ Este repositorio contiene el material del curso SOC4001 Procesamiento Avanzado d
 
 ### Clases
 
-- Clase 01: 26/09, 09:00 a 12:00, **Introducción a R y Rstudio**: [`[Presentación]`](https://mebucca.github.io/dar_soc4001/slides/class_1/#1) [`[.Rmd]`](slides/class_1/class_1.Rmd) [`[RScript]`](slides/class_1/class_1.R) [`[Grabación]`](https://zoom.us/rec/share/qiAknm5lajflej0K68cahyFz97kEEJ6WxyiyKnxqf_eQZg8gtCg2Exkt0aSU-t4.4TgOQ3ic54A5W9vN)
+- Clase 01: 26/09, 09:00 a 12:00, **Introducción a R y Rstudio**: [`[Presentación]`](https://mebucca.github.io/dar_soc4001/slides/class_1/class_1#1) [`[.Rmd]`](slides/class_1/class_1.Rmd) [`[RScript]`](slides/class_1/class_1.R) [`[Grabación]`](https://zoom.us/rec/share/qiAknm5lajflej0K68cahyFz97kEEJ6WxyiyKnxqf_eQZg8gtCg2Exkt0aSU-t4.4TgOQ3ic54A5W9vN)
   
   - Cápsula 01: Instalación `R` y `RStudio`: [`[Link]`](https://www.youtube.com/watch?v=IgsXUjQgtOM&feature=youtu.be) 
 
 
-- Clase 02: 01/10, 18:00 a 20:50, **Introducción a bases de datos en R**: [`[Presentación]`](https://mebucca.github.io/dar_soc4001/slides/class_2/#1) [`[.Rmd]`](slides/class_2/class_2.Rmd) [`[RScript]`](slides/class_2/class_2.R) [`[Grabación]`](https://zoom.us/rec/play/kEmqUCc9ZGQwCSXupctTIarMDK2hjLR1lE1yqUbWzwOfPDhrisKtsY7uWUyeGcSlZyjIeKvCngQrTqjW.43E3x0x5B7Rz5lEW?continueMode=true&_x_zm_rtaid=9_CxiuskSx-rdgg5VDYbIw.1601606724313.a7dfc3f0529ea05011fd92e6f1f58c81&_x_zm_rhtaid=55)
+- Clase 02: 01/10, 18:00 a 20:50, **Introducción a bases de datos en R**: [`[Presentación]`](https://mebucca.github.io/dar_soc4001/slides/class_2/class_2#1) [`[.Rmd]`](slides/class_2/class_2.Rmd) [`[RScript]`](slides/class_2/class_2.R) [`[Grabación]`](https://zoom.us/rec/play/kEmqUCc9ZGQwCSXupctTIarMDK2hjLR1lE1yqUbWzwOfPDhrisKtsY7uWUyeGcSlZyjIeKvCngQrTqjW.43E3x0x5B7Rz5lEW?continueMode=true&_x_zm_rtaid=9_CxiuskSx-rdgg5VDYbIw.1601606724313.a7dfc3f0529ea05011fd92e6f1f58c81&_x_zm_rhtaid=55)
 
 - Clase 03: 03/10, 09:00 a 11:50, **Taller #1 Primer acercamiento a bases de datos en R, CASEN 2017**: [`[RScript]`](slides/class_3/class_3.R) [`[Grabación]`](https://zoom.us/rec/share/yaOGnh8-_VhMV0KDWP2LI6GrdIO_lYCe_NwyH--IuMRsUpJXAjSWbBIxQQuovOtz.UGdq7h1q8zrki1jN)
 
