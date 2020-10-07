@@ -139,7 +139,7 @@ library("ineq")
 ??ineq
 
 Gini(subdata_casen$yautcor, corr = TRUE, na.rm = TRUE)
-=======
+
 
 # Funciones propias
 
