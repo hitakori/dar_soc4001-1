@@ -14,7 +14,9 @@ library("tinytex")
 ```
 
 Ponderación: 12% de la nota final del curso
-Entrega: Desde el momento de entrega, los estudiantes tienen 1 semana exacta de plazo para completar esta tarea. 
+
+Entrega: Desde el momento de entrega, los estudiantes tienen hasta el día domingo 18 de Octubre a las 13:59pm para completar esta tarea y subirla a Classroom. 
+
 Formato: Entregar esta tarea en un archivo comprimido (zip) que contenga la carpeta `workflow` y todas las subcarpetas y archivos. 
 
 Instrucciones: 
