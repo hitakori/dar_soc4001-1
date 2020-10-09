@@ -14,10 +14,11 @@ Este repositorio contiene el material del curso SOC4001 Procesamiento Avanzado d
 
 - Clase 03: 03/10, 09:00 a 11:50, **Taller #1 Primer acercamiento a bases de datos en R, CASEN 2017**: [`[RScript]`](slides/class_3/class_3.R) [`[Grabación]`](https://zoom.us/rec/share/yaOGnh8-_VhMV0KDWP2LI6GrdIO_lYCe_NwyH--IuMRsUpJXAjSWbBIxQQuovOtz.UGdq7h1q8zrki1jN)
 
-  - Cápsula 02: Loops: [`[Link]`]() 
-  - Cápsula 03: Introducción a `plot()`: [`[Link]`]() 
+  - Cápsula 02: Loops: [`[Link]`](https://www.youtube.com/watch?v=i08SBxv3xBU&feature=youtu.be) 
+  - Cápsula 03: Introducción a `plot()`: [`[Link]`](https://www.youtube.com/watch?v=KJrColFtD3Q&feature=youtu.be) 
 
-- Clase 04: 08/10, 18:00 a 20:50, **Taller #2 Workflow**: 
+- Clase 04: 08/10, 18:00 a 20:50, **Taller #2 Workflow**: [`[Grabación 1]`](https://zoom.us/rec/play/EAnesFlA_rs7lkXobnpsaw-ksA8lSsZwQ8MzgY6WyUR6QKyLOG7iBIrFskukkmus8m10dKSNJpy_S-zx.MAR0TrDyRyWxstwO?startTime=1602190820000)[`[Grabación 2]`](https://zoom.us/rec/play/fNVk4CVhqpd1yQ99ibNqm2dqk_-viti2CH9LevVilhxBwjgYuMcCUbOPVdDzZb-0auE0Xpgl2SxEmU17.U1mNi_IkKaQxht7q?startTime=1602190820000)
+
 
 
 ### Evaluaciones 
@@ -25,6 +26,7 @@ Este repositorio contiene el material del curso SOC4001 Procesamiento Avanzado d
 #### Tareas 
 
 - 01/10, Asignación Tarea 1: [`[PDF]`](homework/t_1.pdf)
+- 08/10, Asignación Tarea 2: [`[PDF]`](homework/t_2.pdf)
 
 
 #### Trabajo Final
