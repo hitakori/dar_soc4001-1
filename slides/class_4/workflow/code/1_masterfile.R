@@ -1,14 +1,16 @@
 
 ################################################## Preámbulo #################################################
 
-
 # Limpiar pantalla y remover objetos existentes
-cat("\014")
+cat("\014") 
 rm(list = ls())
-
 
 # Carga paquetes
 library("readstata13")
+library("psych")
+library("scales")
+library("stargazer")
+
 
 ################################################# Directorios #################################################
 
@@ -26,6 +28,7 @@ dirresults  <- paste0(folder,"results/");  dirresults
 
 
 # Set working directory
+getwd()
 setwd(dirdata)
 getwd()
 
@@ -41,10 +44,10 @@ essdata <- read.dta13("ESS8_subset.dta", convert.factors=FALSE); essdata
 
 # Establece el directorio de trabajo correspondiente
 setwd(dircode)
-
 source("2_exploration.R")
 
-########################################### Recodificación ################################################
+
+############################################ Recodificación #################################################
 
 
 # Establece el directorio de trabajo correspondiente
@@ -52,7 +55,8 @@ setwd(dircode)
 
 source("3_recoding.R")
 
-############################################ Data analysis ################################################
+
+############################################## Data analysis #################################################
 
 
 # Set working directory

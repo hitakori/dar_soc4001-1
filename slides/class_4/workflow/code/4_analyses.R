@@ -11,14 +11,11 @@ sapply(essdata_sub[,c("eisced", "age")], sd, na.rm=TRUE)
 
 
 # by group
-
-library(psych)
 summary_table <- describeBy(essdata_sub[,c("eisced", "age")], essdata_sub$cntry)
 
 
-#################### Plots  #################### 
 
-library(scales)
+#################### Plots  #################### 
 
 dev.off()
 
@@ -27,14 +24,14 @@ jpeg(file=filename, width=600, height=350)
 
 par(mfrow=c(1,2))
 
-
 # plot izquierda
 
 unique(essdata$eisced)
 essdata$eisced <- ifelse(essdata$eisced==55, NA, essdata$eisced)
 
 #plot(essdata$eisced, essdata$hinctnta)
-plot(jitter(essdata$eisced,1), jitter(essdata$hinctnta,1), pch=16, col=alpha("blue", 0.01))
+
+plot(jitter(essdata$eisced,1), jitter(essdata$hinctnta,1), pch=16)
 
 countries <- unique(essdata$cntry)
 
@@ -42,7 +39,6 @@ for (c in countries) {
   data_country <- essdata[essdata$cntry==c,] 
   abline(lm(hinctnta ~ eisced, data=data_country))
 }
-
 
 
 # plot derecha
@@ -83,11 +79,15 @@ sum_model2$sigma
 
 # exportar resultados a una linda tabla 
 
-library("stargazer")
-
 filename <- paste0(dirresults,"miprimeratabladeregresion.txt")
 
+
 stargazer(model1, model2, type="text",
-dep.var.labels=c("Education","Education"),
-covariate.labels=c("Age","Age2","Gender (Male=1)", "Gender*Age","Gender*Age2","Intercep"),
- out=filename)
+          covariate.labels=c("Age","Gender (Male=1)", "Gender*Age","Intercep"),
+          dep.var.labels=c("Education","Education"),
+          out=filename)
+
+
+print("================ ANÁLISIS LISTOS !!!! ====================") # Debugging flags
+
+
