@@ -18,7 +18,7 @@ Este repositorio contiene el material del curso SOC4001 Procesamiento Avanzado d
   - Cápsula 03: Introducción a `plot()`: [`[Link]`](https://www.youtube.com/watch?v=KJrColFtD3Q&feature=youtu.be) 
 
 - Clase 04: 08/10, 18:00 a 20:50, **Taller #2 Workflow**: [`[Código]`](slides/class_4/workflow.zip)
-[`[Grabación 1]`](https://zoom.us/rec/share/NwMr0g9prA89k96xrxTlbvgmoCLyoyvuLSQbAtS-BSHKD7yLuTKXfDIayUGXA_gx.7yC_36slEur4IZc9?startTime=1602190820000)[`[Grabación 2]`](https://zoom.us/rec/play/fNVk4CVhqpd1yQ99ibNqm2dqk_-viti2CH9LevVilhxBwjgYuMcCUbOPVdDzZb-0auE0Xpgl2SxEmU17.U1mNi_IkKaQxht7q?startTime=1602190820000)
+[`[Grabación 1]`](https://zoom.us/rec/share/NwMr0g9prA89k96xrxTlbvgmoCLyoyvuLSQbAtS-BSHKD7yLuTKXfDIayUGXA_gx.7yC_36slEur4IZc9?startTime=1602190820000)[`[Grabación 2]`](https://www.dropbox.com/s/s9zdgmim0tsx1if/GMT20201008-210020_Clase-SOC4_1920x1120.mp4?dl=0)
 
 
 
