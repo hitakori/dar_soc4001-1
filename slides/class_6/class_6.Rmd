@@ -16,7 +16,6 @@ output:
       slideNumberFormat: "%current%"
 editor_options: 
   chunk_output_type: console
-
 ---
 
 ## Recapitulación

@@ -13,7 +13,7 @@
 class: center, middle, inverse, title-slide
 
 # Procesamiento avanzado de Bases de Datos en R
-## Manipulación de bases de datos (continuación)
+## Manipulación de bases de datos con tidyverse
 ### <br> Mauricio Bucca<br> Profesor Asistente, Sociología UC
 ### <a href="https://github.com/mebucca">github.com/mebucca</a>
 
@@ -29,6 +29,7 @@ class: center, middle, inverse, title-slide
 
 - Workflow en R
 
+
 ---
 
 ## Hoy hablaremos de ...
@@ -41,12 +42,59 @@ class: center, middle, inverse, title-slide
   
   - ordenar, seleccionar, filtrar con`dplyr`
 
+
+---
+class: fullscreen, left, middle, text-black
+background-image: url("images/typewriter.jpg")
+
+.huge[#tidyverse]
+
+
+---
+## Universo tidyverse
+
+
+.center[![](images/tidyverse_packs.png)]
+
+
+---
+## El creador
+
+.pull-left[
+Hadley Wickham
+![](images/hadley.jpg)
+]
+
+--
+
+.pull-right[
+Los usuarios lo agradecen ...
+![](images/wickham_president.jpg)
+]
+
+---
+## tidyverse, un modo de vida
+
+
+.pull-left[
+![](images/tidydress.png)
+]
+
+--
+
+.pull-right[
+![](images/tidyverse_shower.png)
+]
+
+
 ---
 class: fullscreen, left, middle, text-black
 background-image: url("images/typewriter.jpg")
 
 .huge[#Importar]
 .huge[#datos]
+
+
 
 ---
 
@@ -136,7 +184,6 @@ background-image: url("images/typewriter.jpg")
 .huge[###(bases de datos)]
 
 ---
-
 ## tibble: una version moderna de data frames
 
 &lt;br&gt;
@@ -184,16 +231,16 @@ print(mytibble)
 ## # A tibble: 24 x 3
 ##    x         y z    
 ##    &lt;chr&gt; &lt;int&gt; &lt;fct&gt;
-##  1 A        10 u    
-##  2 B         7 t    
-##  3 C         1 g    
-##  4 A         7 m    
-##  5 B         8 b    
-##  6 C         1 q    
-##  7 A         3 h    
-##  8 B         5 a    
-##  9 C         5 p    
-## 10 A        10 x    
+##  1 A         9 y    
+##  2 B        10 m    
+##  3 C         9 l    
+##  4 A         6 e    
+##  5 B         4 b    
+##  6 C         6 p    
+##  7 A         4 i    
+##  8 B         1 o    
+##  9 C         8 x    
+## 10 A         6 w    
 ## # … with 14 more rows
 ```
 ]
@@ -202,7 +249,9 @@ print(mytibble)
 
 ## Transformar un data frame en tibble
 
-Para transformar un data frame en tibble usamos la función `as_tibble()`. Continuándo con el ejemplo anterior, así se ven los datos de la encuenta Casen 2017 en formato `data.frame()`:
+Para transformar un data frame en tibble usamos la función `as_tibble()`.
+--
+ Continuándo con el ejemplo anterior, así se ven los datos de la encuenta Casen 2017 en formato `data.frame()`:
 
 --
 
@@ -13261,6 +13310,8 @@ Para transformar un data frame en tibble usamos la función `as_tibble()`. Conti
 
 Así se ven cuando los transformamos a `tibble`:
 
+--
+
 
 ```r
 as_tibble(data_casen_csv)
@@ -13435,6 +13486,45 @@ pick_flower(find_hat(Mario))
 .pull-right[
 ####resultado: persona en pie, vestida, mojada
 ]
+]
+
+---
+## ¿Pipes? ¿Para qué?
+
+Retomando: queremos calcular el _promedio de  ingresos (redondeado a cero dígitos) para mujeres con 12 o menos años de escolaridad_. El código de R sería así:
+
+--
+
+
+```r
+round(mean(data_casen_csv$ytotcor[(data_casen_csv$esc &lt;= 12 &amp; data_casen_csv$sexo == 2)], 
+           na.rm = TRUE),0)
+```
+
+```
+## [1] 221740
+```
+
+--
+
+.pull-left[
+Usando "pipes" en `tidyverse`:
+
+
+```r
+data_casen_csv %&gt;%
+  filter(esc &lt;= 12 &amp; sexo == 2) %&gt;%
+  with(mean(ytotcor, na.rm =T)) %&gt;%
+  round(0)
+```
+
+```
+## [1] 221740
+```
+]
+
+.pull-right[
+![](images/tenor.gif)
 ]
 
 ---
@@ -14017,7 +14107,7 @@ background-image: url("images/bicicleta.jpg")
 ---
 class: inverse, middle
 
-Presentacióny código en GitHub: &lt;https://github.com/mebucca/data-analysis-in-R&gt;
+Presentación y código en GitHub: &lt;https://github.com/mebucca/dar_soc4001&gt;
 
 ---
 class: inverse, center, middle
