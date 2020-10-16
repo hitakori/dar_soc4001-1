@@ -1,23 +1,26 @@
 ## readr: cargar archivos .cvs
+library("tidyverse")
 
 library("readr") 
-
-setwd(
-  "~/Library/Mobile Documents/com~apple~CloudDocs/Teaching/ISUC/gentle-ggplot2/data/")
+setwd("~/Library/Mobile Documents/com~apple~CloudDocs/Teaching/ISUC/gentle-ggplot2/data/")
 
 # leer archivo csv
 data_casen_csv <- read_csv("sample_casen2017.csv")
 
 head(as.data.frame(data_casen_csv),4)
 
+
 ## readr: cargar archivos .dta (Stata)
 
+install.packages("haven")
 library("haven") 
 
 setwd(
   "~/Library/Mobile Documents/com~apple~CloudDocs/Teaching/ISUC/gentle-ggplot2/data/"
 )
 
+
+read_dta("sample_casen2017.dta")
 # leer archivo dta 
 data_casen_dta <- read_dta("sample_casen2017.dta", encoding = "latin1", .name_repair = "minimal")
 
@@ -56,10 +59,14 @@ my_mean <- mean(sub_muestra,
 
 round(my_mean,0)
 
+
 # pipes
+
 data_casen_csv %>%
+  select(esc,sexo,ypchautcor) %>%
+  arrange(esc) %>%
   filter(esc <= 12 & sexo == 2) %>%
-  with(mean(ytotcor, na.rm =T)) %>%
+  with(mean(ypchautcor, na.rm =T)) %>%
   round(0)
 
 
@@ -79,6 +86,7 @@ data_casen_csv %>% select(starts_with("y"))
 data_casen_csv %>% select(ends_with("a"))
 data_casen_csv %>% select(contains("cor"))
 data_casen_csv %>% select((num_range("x", 10:15)))
+
 
 ## filter: selección de variables
 
