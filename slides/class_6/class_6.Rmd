@@ -101,7 +101,7 @@ Continuando con los datos de la encuesta Casen 2017, esta es la vista no-ordenad
 library("readr") 
 
 setwd(
-  "~/Library/Mobile Documents/com~apple~CloudDocs/Teaching/ISUC/gentle-ggplot2/data/")
+  "~/Library/Mobile Documents/com~apple~CloudDocs/Teaching/ISUC/2020_2_data_analysis_r/repo/slides/class_5/")
 
 # leer archivo csv
 data_casen_csv <- read_csv("sample_casen2017.csv")
@@ -156,7 +156,7 @@ data_casen_csv %>% select(sexo,edad,ytotcor) %>%
  
 - Estructura: `if_else(condición, si cumple, si no cumple )`
  
-- Notar que es posible reemplazar la variabe existente. 
+- Notar que es posible reemplazar la variable existente. 
 
 - Lo mismo se podría escribir así:
 
@@ -347,7 +347,7 @@ background-image: url("images/bicicleta.jpg")
 ---
 class: inverse, middle
 
-Presentacióny código en GitHub: <https://github.com/mebucca/data-analysis-in-R>
+Presentación y código en GitHub: <https://github.com/mebucca/dar_soc4001>
 
 ---
 class: inverse, center, middle
