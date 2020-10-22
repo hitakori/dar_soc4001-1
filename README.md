@@ -32,6 +32,8 @@ Este repositorio contiene el material del curso SOC4001 Procesamiento Avanzado d
 
 - 01/10, Asignación Tarea 1: [`[PDF]`](homework/t_1.pdf)[`[Solución]`](homework/t_1_answers.pdf)
 - 08/10, Asignación Tarea 2: [`[PDF]`](homework/t_2.pdf)
+- 22/10, Asignación Tarea 3: [`[PDF]`](homework/t_3.pdf)
+
 
 
 #### Trabajo Final
