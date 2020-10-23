@@ -1,6 +1,6 @@
 ---
 title: "Procesamiento avanzado de Bases de Datos en R"
-subtitle: "Manipulación de bases de datos (continuación)"
+subtitle: "Manipulación de bases de datos con tidyverse"
 author: "<br> Mauricio Bucca<br> Profesor Asistente, Sociología UC"
 date: "[github.com/mebucca](https://github.com/mebucca)"
 output:
@@ -247,92 +247,7 @@ data_casen_csv %>%
 ```
 
 
-
 ---
-class: inverse, center, middle
-
-.huge[
-**dplyr::summarise()**
-]
-
----
-## summarise: extrayendo información de los datos
-
-La función `summarise()` permite calcular una variedad de medidas en base a los datos. 
-
-- Una de las principales ventajas es que esta función retorna una base de datos con los resultados, que puede ser usado para posterior análisis (ej, gráficos).
-
-- Combinando con `group_by()` resulta una herramiendo muy conveniente. 
-
-
----
-## summarise: extrayendo información de los datos
-
-
-```{r, message=FALSE}
-data_casen_csv %>% 
-  group_by(region, sexo) %>% #<<
-  summarise(n_region = n(), mean_ytotcor_region = mean(ytotcor, na.rm = T)) 
-```
-
-
-
----
-## summarise: algunas funciones útiles
-
-.pull-left[
-- `median()`
-- `sd()`
-- `min()`, `max()`
-- `quantile()`
-- `first()`, `last()`, `nth()`
-- `n()`, `n_distinct()`
-- `any()`, `all()`
-
-Ejemplo:
-
-- Quantile:
-```{r}
-data_casen_csv %>% 
-  summarise(q20=quantile(ytotcor, probs=0.2, na.rm = T))
-```
-]
-
-.pull-right[
-
-- 3er caso:
-```{r}
-data_casen_csv %>% 
-  summarise(tercer=nth(ytotcor, n=3))
-```
-
-- Cantidad de valores distintos
-```{r}
-data_casen_csv %>% 
-  summarise(distintos=n_distinct(ytotcor))
-```
-
-]
-
----
-## summarise: funciones propias o externas
-
-Supongamos que queremos calcular el indice de Gini para cada región de Chile.
-
-```{r, message=FALSE}
-library(ineq) #<<
-data_casen_csv %>% 
-  group_by(region, sexo) %>% 
-  summarise(gini = Gini(ytotcor, na.rm = T)) #<<
-```
-
----
-
-## En la próxima clase ... 
-
-- Juntar bases de datos 
----
-
 class: fullscreen,left, top, top, text-azzurro
 background-image: url("images/bicicleta.jpg")
 
