@@ -29,6 +29,7 @@ Este repositorio contiene el material del curso SOC4001 Procesamiento Avanzado d
 
 - Clase 08: 29/10, 18:00 a 20:50, **Taller #3 Manipulación de bases de datos con tidyverse (3)**: [`[RScript]`](slides/class_8/class_8.R)
 
+  - Cápsula 04: Instalación y uso de `Github Desktop`: [`[Link]`](https://www.youtube.com/watch?v=VUNtPWhVpOQ&feature=youtu.be) 
 
 
 ### Evaluaciones 
