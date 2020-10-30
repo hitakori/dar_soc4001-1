@@ -27,6 +27,9 @@ Este repositorio contiene el material del curso SOC4001 Procesamiento Avanzado d
 
 - Clase 07: 24/10, 18:00 a 20:50, **Manipulación de bases de datos con tidyverse (3)**: [`[Presentación]`](https://mebucca.github.io/dar_soc4001/slides/class_7/class_7#1) [`[.Rmd]`](slides/class_7/class_7.Rmd) [`[RScript]`](slides/class_7/class_7.R)[`[Grabación]`](https://zoom.us/rec/play/bZnhkb-r1AWljg-NGxbQ4OQclGrXtkcEDgSyMx-0UrYJlj85kQl04EPGUVyIEsIbkxqg-2OLPclOA26U.5e_0kiIPRRe0AiZh?continueMode=true&_x_zm_rtaid=B0k7zP4fQ8Oh4qMLcVNFbw.1603806063432.f475e5ba6847378fa0e4a1f17d5e7e1a&_x_zm_rhtaid=242)
 
+- Clase 08: 29/10, 18:00 a 20:50, **Taller #3 Manipulación de bases de datos con tidyverse (3)**: [`[RScript]`](slides/class_8/class_8.R)[`[Grabación]`](https://zoom.us/rec/play/l7CzxXc3wqCoxokGFfRnqglhz-26ZMzwVRbqYsDSTcLmfrsFpPkQOTx2ihrNMcxRlCksfTf-qm4KZK2e.Rnc9xSN_AN8P9PEa?continueMode=true&_x_zm_rtaid=dwo5Uh3GT_eYnIjh5z3mcw.1604057259582.7e198f296f7fec5817ac8b548c711af8&_x_zm_rhtaid=773)
+
+  - Cápsula 04: Instalación y uso de `Github Desktop`: [`[Link]`](https://www.youtube.com/watch?v=VUNtPWhVpOQ&feature=youtu.be) 
 
 
 ### Evaluaciones 
