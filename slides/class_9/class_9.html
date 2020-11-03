@@ -471,18 +471,18 @@ wl_long %&gt;%
 
 ```
 ## # A tibble: 204 x 6
-##       id group   outcome week  score  error
-##    &lt;int&gt; &lt;fct&gt;   &lt;chr&gt;   &lt;chr&gt; &lt;int&gt;  &lt;dbl&gt;
-##  1     1 Control wl      1         4  1.84 
-##  2     1 Control wl      2         3  1.03 
-##  3     1 Control wl      3         3 -0.512
-##  4     1 Control se      1        14  0.454
-##  5     1 Control se      2        13  1.83 
-##  6     1 Control se      3        15  0.998
-##  7     2 Control wl      1         4 -0.413
-##  8     2 Control wl      2         4  0.552
-##  9     2 Control wl      3         3  0.929
-## 10     2 Control se      1        13 -0.427
+##       id group   outcome week  score   error
+##    &lt;int&gt; &lt;fct&gt;   &lt;chr&gt;   &lt;chr&gt; &lt;int&gt;   &lt;dbl&gt;
+##  1     1 Control wl      1         4  0.0938
+##  2     1 Control wl      2         3  0.266 
+##  3     1 Control wl      3         3  0.450 
+##  4     1 Control se      1        14  2.19  
+##  5     1 Control se      2        13 -0.922 
+##  6     1 Control se      3        15 -1.15  
+##  7     2 Control wl      1         4  0.614 
+##  8     2 Control wl      2         4  0.753 
+##  9     2 Control wl      3         3 -0.889 
+## 10     2 Control se      1        13  1.65  
 ## # … with 194 more rows
 ```
 
@@ -501,16 +501,16 @@ wl_long %&gt;% mutate(error = rnorm(n())) %&gt;%
 ## # A tibble: 102 x 7
 ##       id group   week  score_wl score_se error_wl error_se
 ##    &lt;int&gt; &lt;fct&gt;   &lt;chr&gt;    &lt;int&gt;    &lt;int&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-##  1     1 Control 1            4       14  0.677    -1.54  
-##  2     1 Control 2            3       13  1.07     -0.282 
-##  3     1 Control 3            3       15  1.54      0.599 
-##  4     2 Control 1            4       13 -1.19      0.621 
-##  5     2 Control 2            4       14 -0.888     0.824 
-##  6     2 Control 3            3       17  0.731     0.279 
-##  7     3 Control 1            4       17 -1.54      2.44  
-##  8     3 Control 2            3       12  0.0553   -0.636 
-##  9     3 Control 3            1       16 -0.806    -0.0886
-## 10     4 Control 1            3       11  0.00787   0.822 
+##  1     1 Control 1            4       14    0.858   0.228 
+##  2     1 Control 2            3       13   -0.708  -1.29  
+##  3     1 Control 3            3       15    0.749   1.52  
+##  4     2 Control 1            4       13    1.74    0.902 
+##  5     2 Control 2            4       14    0.662  -0.0223
+##  6     2 Control 3            3       17   -2.62   -1.56  
+##  7     3 Control 1            4       17    1.29   -1.00  
+##  8     3 Control 2            3       12   -0.276   0.630 
+##  9     3 Control 3            1       16    0.716  -2.51  
+## 10     4 Control 1            3       11    0.106  -0.466 
 ## # … with 92 more rows
 ```
 
@@ -527,19 +527,21 @@ wl_long %&gt;% mutate(error = rnorm(n())) %&gt;%
 
 ```
 ## # A tibble: 34 x 14
-##       id group score_wl_1 score_wl_2 score_wl_3 score_se_1 score_se_2 score_se_3 error_wl_1 error_wl_2 error_wl_3
-##    &lt;int&gt; &lt;fct&gt;      &lt;int&gt;      &lt;int&gt;      &lt;int&gt;      &lt;int&gt;      &lt;int&gt;      &lt;int&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
-##  1     1 Cont…          4          3          3         14         13         15     0.649      -0.514     0.189 
-##  2     2 Cont…          4          4          3         13         14         17    -1.10       -1.36     -0.0138
-##  3     3 Cont…          4          3          1         17         12         16    -0.866       1.22     -0.242 
-##  4     4 Cont…          3          2          1         11         11         12    -0.320      -1.32     -2.50  
-##  5     5 Cont…          5          3          2         16         15         14    -0.397       1.08      0.589 
-##  6     6 Cont…          6          5          4         17         18         18    -0.842       0.959     0.0171
-##  7     7 Cont…          6          5          4         17         16         19     0.105       0.239     0.318 
-##  8     8 Cont…          5          4          1         13         15         15    -0.864       0.528    -0.413 
-##  9     9 Cont…          5          4          1         14         14         15     1.41        0.938     2.55  
-## 10    10 Cont…          3          3          2         14         15         13     0.0449      0.283     0.203 
-## # … with 24 more rows, and 3 more variables: error_se_1 &lt;dbl&gt;, error_se_2 &lt;dbl&gt;, error_se_3 &lt;dbl&gt;
+##       id group score_wl_1 score_wl_2 score_wl_3 score_se_1 score_se_2 score_se_3
+##    &lt;int&gt; &lt;fct&gt;      &lt;int&gt;      &lt;int&gt;      &lt;int&gt;      &lt;int&gt;      &lt;int&gt;      &lt;int&gt;
+##  1     1 Cont…          4          3          3         14         13         15
+##  2     2 Cont…          4          4          3         13         14         17
+##  3     3 Cont…          4          3          1         17         12         16
+##  4     4 Cont…          3          2          1         11         11         12
+##  5     5 Cont…          5          3          2         16         15         14
+##  6     6 Cont…          6          5          4         17         18         18
+##  7     7 Cont…          6          5          4         17         16         19
+##  8     8 Cont…          5          4          1         13         15         15
+##  9     9 Cont…          5          4          1         14         14         15
+## 10    10 Cont…          3          3          2         14         15         13
+## # … with 24 more rows, and 6 more variables: error_wl_1 &lt;dbl&gt;,
+## #   error_wl_2 &lt;dbl&gt;, error_wl_3 &lt;dbl&gt;, error_se_1 &lt;dbl&gt;, error_se_2 &lt;dbl&gt;,
+## #   error_se_3 &lt;dbl&gt;
 ```
 
 
@@ -642,21 +644,24 @@ data_mpd_messy
 
 ```
 ## # A tibble: 25 x 19
-##    X1    `GDP pc 2011 pr… `GDP pc 2011 pr… `GDP pc 2011 pr… `GDP pc 2011 pr… `GDP pc 2011 pr… `GDP pc 2011 pr…
-##    &lt;chr&gt; &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;           
-##  1 Regi… Western Europe   Eastern Europe   Western Offshoo… Latin America    Asia (East)      Asia (South and…
-##  2 Year  &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;            
-##  3 1820  2.307            818              2.513            953              1.089            929             
-##  4 1830  2.384            942              &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;            
-##  5 1840  2.580            907              &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;            
-##  6 1850  2.678            985              3.474            1.081            900              929             
-##  7 1860  3.034            1.358            4.214            1.588            &lt;NA&gt;             &lt;NA&gt;            
-##  8 1870  3.301            1.575            4.647            1.319            989              850             
-##  9 1880  3.585            1.886            6.019            &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;            
-## 10 1890  4.079            2.204            6.481            1.673            &lt;NA&gt;             951             
-## # … with 15 more rows, and 12 more variables: `GDP pc 2011 prices_6` &lt;chr&gt;, `GDP pc 2011 prices_7` &lt;chr&gt;,
-## #   Population &lt;chr&gt;, Population_1 &lt;chr&gt;, Population_2 &lt;chr&gt;, Population_3 &lt;chr&gt;, Population_4 &lt;chr&gt;,
-## #   Population_5 &lt;chr&gt;, Population_6 &lt;chr&gt;, Population_7 &lt;chr&gt;, Population_8 &lt;chr&gt;, Population_9 &lt;chr&gt;
+##    X1    `GDP pc 2011 pr… `GDP pc 2011 pr… `GDP pc 2011 pr… `GDP pc 2011 pr…
+##    &lt;chr&gt; &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;           
+##  1 Regi… Western Europe   Eastern Europe   Western Offshoo… Latin America   
+##  2 Year  &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;            
+##  3 1820  2.307            818              2.513            953             
+##  4 1830  2.384            942              &lt;NA&gt;             &lt;NA&gt;            
+##  5 1840  2.580            907              &lt;NA&gt;             &lt;NA&gt;            
+##  6 1850  2.678            985              3.474            1.081           
+##  7 1860  3.034            1.358            4.214            1.588           
+##  8 1870  3.301            1.575            4.647            1.319           
+##  9 1880  3.585            1.886            6.019            &lt;NA&gt;            
+## 10 1890  4.079            2.204            6.481            1.673           
+## # … with 15 more rows, and 14 more variables: `GDP pc 2011 prices_4` &lt;chr&gt;,
+## #   `GDP pc 2011 prices_5` &lt;chr&gt;, `GDP pc 2011 prices_6` &lt;chr&gt;, `GDP pc 2011
+## #   prices_7` &lt;chr&gt;, Population &lt;chr&gt;, Population_1 &lt;chr&gt;, Population_2 &lt;chr&gt;,
+## #   Population_3 &lt;chr&gt;, Population_4 &lt;chr&gt;, Population_5 &lt;chr&gt;,
+## #   Population_6 &lt;chr&gt;, Population_7 &lt;chr&gt;, Population_8 &lt;chr&gt;,
+## #   Population_9 &lt;chr&gt;
 ```
 
 ---
@@ -671,19 +676,20 @@ data_mpd_messy %&gt;% select(X1,starts_with("GDP")) %&gt;% row_to_names(row_numb
 
 ```
 ## # A tibble: 23 x 9
-##    year  `Western Europe` `Eastern Europe` `Western Offsho… `Latin America` `Asia (East)` `Asia (South an… `Middle East`
-##    &lt;chr&gt; &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;           &lt;chr&gt;         &lt;chr&gt;            &lt;chr&gt;        
-##  1 1820  2.307            818              2.513            953             1.089         929              974          
-##  2 1830  2.384            942              &lt;NA&gt;             &lt;NA&gt;            &lt;NA&gt;          &lt;NA&gt;             &lt;NA&gt;         
-##  3 1840  2.580            907              &lt;NA&gt;             &lt;NA&gt;            &lt;NA&gt;          &lt;NA&gt;             &lt;NA&gt;         
-##  4 1850  2.678            985              3.474            1.081           900           929              1.000        
-##  5 1860  3.034            1.358            4.214            1.588           &lt;NA&gt;          &lt;NA&gt;             &lt;NA&gt;         
-##  6 1870  3.301            1.575            4.647            1.319           989           850              1.165        
-##  7 1880  3.585            1.886            6.019            &lt;NA&gt;            &lt;NA&gt;          &lt;NA&gt;             &lt;NA&gt;         
-##  8 1890  4.079            2.204            6.481            1.673           &lt;NA&gt;          951              &lt;NA&gt;         
-##  9 1900  4.724            2.700            7.741            1.751           1.086         994              1.300        
-## 10 1910  5.135            2.283            9.355            2.194           &lt;NA&gt;          1.143            &lt;NA&gt;         
-## # … with 13 more rows, and 1 more variable: `Sub-Sahara Africa` &lt;chr&gt;
+##    year  `Western Europe` `Eastern Europe` `Western Offsho… `Latin America`
+##    &lt;chr&gt; &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;          
+##  1 1820  2.307            818              2.513            953            
+##  2 1830  2.384            942              &lt;NA&gt;             &lt;NA&gt;           
+##  3 1840  2.580            907              &lt;NA&gt;             &lt;NA&gt;           
+##  4 1850  2.678            985              3.474            1.081          
+##  5 1860  3.034            1.358            4.214            1.588          
+##  6 1870  3.301            1.575            4.647            1.319          
+##  7 1880  3.585            1.886            6.019            &lt;NA&gt;           
+##  8 1890  4.079            2.204            6.481            1.673          
+##  9 1900  4.724            2.700            7.741            1.751          
+## 10 1910  5.135            2.283            9.355            2.194          
+## # … with 13 more rows, and 4 more variables: `Asia (East)` &lt;chr&gt;, `Asia (South
+## #   and South-East)` &lt;chr&gt;, `Middle East` &lt;chr&gt;, `Sub-Sahara Africa` &lt;chr&gt;
 ```
 
 
@@ -783,14 +789,17 @@ data_casen_csv %&gt;%
 
 ```
 ## # A tibble: 1 x 26
-##   yaimcorh_media yaimcorh_mediana yautcor_media yautcor_mediana ytotcor_media ytotcor_mediana yautcorh_media
-##            &lt;dbl&gt;            &lt;dbl&gt;         &lt;dbl&gt;           &lt;dbl&gt;         &lt;dbl&gt;           &lt;dbl&gt;          &lt;dbl&gt;
-## 1        181168.           150000       491459.          302500       414351.         274718.        941282.
-## # … with 19 more variables: yautcorh_mediana &lt;dbl&gt;, ymonecorh_media &lt;dbl&gt;, ymonecorh_mediana &lt;dbl&gt;,
-## #   ytotcorh_media &lt;dbl&gt;, ytotcorh_mediana &lt;dbl&gt;, yoprcor_media &lt;dbl&gt;, yoprcor_mediana &lt;dbl&gt;, yoprcorh_media &lt;dbl&gt;,
-## #   yoprcorh_mediana &lt;dbl&gt;, ytrabajocor_media &lt;dbl&gt;, ytrabajocor_mediana &lt;dbl&gt;, ytrabajocorh_media &lt;dbl&gt;,
-## #   ytrabajocorh_mediana &lt;dbl&gt;, ypchautcor_media &lt;dbl&gt;, ypchautcor_mediana &lt;dbl&gt;, ypc_media &lt;dbl&gt;, ypc_mediana &lt;dbl&gt;,
-## #   ypchtrabajo_media &lt;dbl&gt;, ypchtrabajo_mediana &lt;dbl&gt;
+##   yaimcorh_media yaimcorh_mediana yautcor_media yautcor_mediana ytotcor_media
+##            &lt;dbl&gt;            &lt;dbl&gt;         &lt;dbl&gt;           &lt;dbl&gt;         &lt;dbl&gt;
+## 1        181168.           150000       491459.          302500       414351.
+## # … with 21 more variables: ytotcor_mediana &lt;dbl&gt;, yautcorh_media &lt;dbl&gt;,
+## #   yautcorh_mediana &lt;dbl&gt;, ymonecorh_media &lt;dbl&gt;, ymonecorh_mediana &lt;dbl&gt;,
+## #   ytotcorh_media &lt;dbl&gt;, ytotcorh_mediana &lt;dbl&gt;, yoprcor_media &lt;dbl&gt;,
+## #   yoprcor_mediana &lt;dbl&gt;, yoprcorh_media &lt;dbl&gt;, yoprcorh_mediana &lt;dbl&gt;,
+## #   ytrabajocor_media &lt;dbl&gt;, ytrabajocor_mediana &lt;dbl&gt;,
+## #   ytrabajocorh_media &lt;dbl&gt;, ytrabajocorh_mediana &lt;dbl&gt;,
+## #   ypchautcor_media &lt;dbl&gt;, ypchautcor_mediana &lt;dbl&gt;, ypc_media &lt;dbl&gt;,
+## #   ypc_mediana &lt;dbl&gt;, ypchtrabajo_media &lt;dbl&gt;, ypchtrabajo_mediana &lt;dbl&gt;
 ```
 
 ---
