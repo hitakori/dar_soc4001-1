@@ -50,16 +50,16 @@ class: center, middle
 class: fullscreen, left, middle, text-black
 background-image: url("images/typewriter.jpg")
 
-.huge[#dplyr]
+.huge[#tidyr]
 
 ---
 
-## dplyr: herramientas intuitivas para manipulación de datos
+## tidyr: herramientas intuitivas para manipulación de datos
 
 <br>
 
 .pull-left[
-  ![dplyr](images/tidyr.png)
+  ![tidyr](images/tidyr.png)
 ]
 
 .pull-right[
