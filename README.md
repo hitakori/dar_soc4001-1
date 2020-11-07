@@ -31,9 +31,9 @@ Este repositorio contiene el material del curso SOC4001 Procesamiento Avanzado d
 
   - Cápsula 04: Instalación y uso de `Github Desktop`: [`[Link]`](https://www.youtube.com/watch?v=VUNtPWhVpOQ&feature=youtu.be) 
 
-- Clase 09: 05/11, 18:00 a 20:50, **Manipulación de bases de datos con tidyverse (5)**: [`[Presentación]`](https://mebucca.github.io/dar_soc4001/slides/class_9/class_9#1) [`[.Rmd]`](slides/class_9/class_9.Rmd) [`[RScript]`](slides/class_9/class_9.R) [`[Grabación]`](https://zoom.us/rec/share/RsqsS2k74EWooEfoZd-yfaWnhwWJSNovvK-ooWVu9hgZgpHcuOrs1-cAm72LgaUN.9QId1rC4ie1XaOOB?startTime=1604610008000)
+- Clase 09: 05/11, 18:00 a 20:50, **Manipulación de bases de datos con tidyverse (5)**: [`[Presentación]`](https://mebucca.github.io/dar_soc4001/slides/class_9/class_9#1) [`[.Rmd]`](slides/class_9/class_9.Rmd) [`[RScript]`](slides/class_9/class_9.R) [`[Grabación]`](https://zoom.us/rec/share/R9FLT6QsPLy6x45TVAdm3KW7FNm7c1QEMBS2IW12xplfwD5XMgmRTSR3vekxSiQG.LA8hYEB5XGDZKyxy?startTime=1604610008000)
 
-- Clase 10: 07/11, 09:00 a 11:50, **Manipulación de bases de datos con tidyverse (6)**: [`[Presentación]`](https://mebucca.github.io/dar_soc4001/slides/class_10/class_10#1) [`[.Rmd]`](slides/class_10/class_10.Rmd) [`[RScript]`](slides/class_10/class_10.R) [`[Grabación]`](https://zoom.us/rec/share/VtLvCPZFo4R8ZXowDC5iW299PwBC_XcOiyYXzp_ux0_2GGnFhF8vt4MtObSc3R6k.2wRhpGYUjHoXqQZh?startTime=1604610008000)
+- Clase 10: 07/11, 09:00 a 11:50, **Manipulación de bases de datos con tidyverse (6)**: [`[Presentación]`](https://mebucca.github.io/dar_soc4001/slides/class_10/class_10#1) [`[.Rmd]`](slides/class_10/class_10.Rmd) [`[RScript]`](slides/class_10/class_10.R) [`[Grabación]`](https://zoom.us/rec/share/DFVQBSNzrgQre8l3RSDRxyicWg8KVqhYvXnDFc8yCffn19-0s3ER0ITRV1JhHRqQ.upzoCW3XhUa3_yb7?startTime=1604750265000)
 
 ### Evaluaciones 
 
