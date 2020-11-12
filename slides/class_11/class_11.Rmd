@@ -1,6 +1,6 @@
 ---
 title: "Procesamiento avanzado de Bases de Datos en R"
-subtitle: "Manipulación de bases de datos con tidyverse"
+subtitle: "Visualización de datos con ggplots"
 author: "<br> Mauricio Bucca<br> Profesor Asistente, Sociología UC"
 date: "[github.com/mebucca](https://github.com/mebucca)"
 output:
@@ -407,6 +407,28 @@ geom_line() #<<
 --
 .pull-right[
 ```{r  gg-geom2-out, ref.label="gg-geom2", echo=FALSE, warning=FALSE, message=FALSE, fig.height=6}
+
+```
+]
+
+---
+## gg Gramática de Gráficos: `geom_()`etría 
+
+<br>
+Adivina los datos detrás del siguiente gráfico ...
+
+.pull-left[
+```{r  gg-geom22, eval=FALSE,warning=FALSE, message=FALSE}
+data_ineq %>%
+ggplot(aes(x=gini_yaut, y=gini_ytot)) +
+geom_point() + #<<
+geom_line() #<<
+```
+]
+
+--
+.pull-right[
+```{r  gg-geom22-out, ref.label="gg-geom22", echo=FALSE, warning=FALSE, message=FALSE, fig.height=6}
 
 ```
 ]

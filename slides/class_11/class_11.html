@@ -13,7 +13,7 @@
 class: center, middle, inverse, title-slide
 
 # Procesamiento avanzado de Bases de Datos en R
-## Manipulación de bases de datos con tidyverse
+## Visualización de datos con ggplots
 ### <br> Mauricio Bucca<br> Profesor Asistente, Sociología UC
 ### <a href="https://github.com/mebucca">github.com/mebucca</a>
 
@@ -409,6 +409,27 @@ ggplot(aes(x=gini_yaut, y=gini_ytot)) +
 --
 .pull-right[
 ![](class_11_files/figure-html/gg-geom2-out-1.png)&lt;!-- --&gt;
+]
+
+---
+## gg Gramática de Gráficos: `geom_()`etría 
+
+&lt;br&gt;
+Adivina los datos detrás del siguiente gráfico ...
+
+.pull-left[
+
+```r
+data_ineq %&gt;%
+ggplot(aes(x=gini_yaut, y=gini_ytot)) +
+*geom_point() +
+*geom_line()
+```
+]
+
+--
+.pull-right[
+![](class_11_files/figure-html/gg-geom22-out-1.png)&lt;!-- --&gt;
 ]
 
 ---
