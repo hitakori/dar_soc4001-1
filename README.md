@@ -35,6 +35,9 @@ Este repositorio contiene el material del curso SOC4001 Procesamiento Avanzado d
 
 - Clase 10: 07/11, 09:00 a 11:50, **Manipulación de bases de datos con tidyverse (6)**: [`[Presentación]`](https://mebucca.github.io/dar_soc4001/slides/class_10/class_10#1) [`[.Rmd]`](slides/class_10/class_10.Rmd) [`[RScript]`](slides/class_10/class_10.R) [`[Grabación]`](https://zoom.us/rec/share/DFVQBSNzrgQre8l3RSDRxyicWg8KVqhYvXnDFc8yCffn19-0s3ER0ITRV1JhHRqQ.upzoCW3XhUa3_yb7?startTime=1604750265000)
 
+- Clase 11: 12/11, 18:00 a 20:50, **Visualización de datos con ggplot (1)**: [`[Presentación]`](https://mebucca.github.io/dar_soc4001/slides/class_11/class_11#1) [`[.Rmd]`](slides/class_11/class_11.Rmd) [`[RScript]`](slides/class_11/class_11.R)
+
+
 ### Evaluaciones 
 
 #### Tareas 
