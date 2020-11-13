@@ -49,6 +49,7 @@ g <- data_ineq %>% ggplot(aes(x=log(media_yaut), y=gini_yaut, colour=educ)) +
   scale_color_viridis(option="magma") 
 
 g
+
 data_ineq %>% ggplot(aes(x=log(media_yaut), y=gini_yaut, colour=educ)) +
   geom_point(size=2, alpha=0.4) +
   geom_hline(yintercept = 0.5) +
