@@ -1,70 +1,51 @@
-# Limpiar pantalla y remover objetos existentes
-cat("\014") 
-rm(list = ls())
-
-## Bases de datos ordenadas ("tidy") 
-
 library("tidyverse")
-library("ineq")
-library("ggsci")
+library("wesanderson")
+library("cowplot")
+library("lubridate")
 library("viridis")
 
 setwd(
-  "~/Library/Mobile Documents/com~apple~CloudDocs/Teaching/ISUC/2020_2_data_analysis_r/repo/slides/class_5/")
+  "~/Library/Mobile Documents/com~apple~CloudDocs/Teaching/ISUC/2020_2_data_analysis_r/repo/slides/class_12/")
 
 # leer archivo csv
-data_casen_csv <- read_csv("sample_casen2017.csv")
-data_casen_csv %>% glimpse()
-
-data_ineq <- data_casen_csv %>% 
-  group_by(comuna,educ,sexo) %>% 
-  summarise(gini_ytot=Gini(ytotcor,na.rm = T), gini_yaut=Gini(yautcor,na.rm = T), media_yaut=mean(yautcor,na.rm = T)) %>%
-  mutate(ratio=gini_ytot/gini_yaut) %>%
-  mutate(educ = if_else(educ==99,NA_real_,educ))
-
-# Construir gráfico en layers
-
-# paso 1:
-
-data_ineq %>% ggplot()
-
-#o
-
-ggplot(data=data_ineq) 
+covid_data <- read_delim("covid_data.csv", delim=";")
+covid_data <- covid_data %>% filter(date==as.Date("2020-11-17")) 
+covid_data  %>% glimpse()
 
 
-# paso 2
 
-# color continuo
-data_ineq %>% ggplot(aes(x=media_yaut, y=gini_yaut)) + geom_point()
-                     
-g <- data_ineq %>% ggplot(aes(x=log(media_yaut), y=gini_yaut, colour=educ)) +
-  geom_point(size=2, alpha=0.4) +
-  geom_hline(yintercept = 0.5) +
-  geom_vline(xintercept = 10) +
-  ylim(0,0.7) +
+# Scatterplot
+
+#jitter <- position_jitter(width = 10, height = 1)
+
+covid_data %>% ggplot(aes(y=total_deaths_per_million, 
+                          x=hospital_beds_per_thousand)) +
+  geom_point(alpha=0.3) +
+  scale_x_log10() + scale_y_log10() +
+  geom_smooth(method = "lm", se=F)
+
+
+# Scatterplot por grupos
+
+covid_data %>% ggplot(aes(y=total_deaths_per_million, 
+                          x=hospital_beds_per_thousand, 
+                          group=continent,
+                          colour=continent
+)) +
+  geom_point(alpha=0.3) +
+  scale_x_log10() + scale_y_log10() +
+  geom_smooth(method = "lm", se=F) +
+  labs(x="Camas de hospital por mil hbs.", y="muertes totales por millón hbs.") +
+  facet_wrap(continent ~ .) +
   theme_bw() +
-  facet_grid( sexo ~ .) +
-  labs(x="Log median ingreso autónomo indiv.",  y="Gini Ingreso autonomo indiv.", color = "Educación") +
-  scale_color_viridis(option="magma") 
-
-g
-
-data_ineq %>% ggplot(aes(x=log(media_yaut), y=gini_yaut, colour=educ)) +
-  geom_point(size=2, alpha=0.4) +
-  geom_hline(yintercept = 0.5) +
-  geom_vline(xintercept = 10) +
-  ylim(0,0.7) +
-  theme_bw() +
-  facet_grid( . ~ sexo) +
-  labs(x="Log median ingreso autónomo indiv.",  y="Gini Ingreso autonomo indiv.", color = "Educación") +
-  scale_color_viridis(option="magma") 
+  theme(legend.position = "bottom") 
 
 
-# RETOMAR: jitter + transparencia
+# Density
 
-data_casen_csv %>% ggplot(aes(x=esc, y=yautcor, colour=sexo)) +
-  geom_point(size=2, alpha=0.4) +
-  theme_bw() +
-  scale_color_viridis(option="magma") 
+p <- covid_data %>% ggplot(aes(y=total_deaths_per_million, x=gdp_per_capita)) +
+  scale_x_log10() + scale_y_log10() +
+  geom_density_2d_filled() +
+  labs(title="Grafico de densidad",  x="GDP per cápita", y="muertes totales por millón hbs.") 
 
+ggsave("miprimerggplot.pdf", p, width = 20, height = 20, units = "cm")
