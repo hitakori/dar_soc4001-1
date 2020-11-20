@@ -38,7 +38,7 @@ Este repositorio contiene el material del curso SOC4001 Procesamiento Avanzado d
 - Clase 11: 12/11, 18:00 a 20:50, **Visualización de datos con ggplot (1)**: [`[Presentación]`](https://mebucca.github.io/dar_soc4001/slides/class_11/class_11#1) [`[.Rmd]`](slides/class_11/class_11.Rmd) [`[RScript]`](slides/class_11/class_11.R) [`[Grabación]`](https://zoom.us/rec/play/CjF_rVVY1TyO-9LRQvHdFhTyfsg6LNmAZgDeLtxs8d-o8NPxsrvYMdbt4HEnJ_UIlKRT__cEPD1nkCQ7.ams9R09gcN28ZnJ8?continueMode=true&_x_zm_rtaid=hux5ZssESJKrhfYxe39Ofw.1605266556083.5f7be7c2aa78f78da3e5a87b2bd57a0d&_x_zm_rhtaid=413)
 
 
-- Clase 12: 19/11, 18:00 a 20:50, **Visualización de datos con ggplot (2)**: [`[Presentación]`](https://mebucca.github.io/dar_soc4001/slides/class_12/class_12#1) [`[.Rmd]`](slides/class_12/class_12.Rmd) [`[RScript]`](slides/class_12/class_12.R)
+- Clase 12: 19/11, 18:00 a 20:50, **Visualización de datos con ggplot (2)**: [`[Presentación]`](https://mebucca.github.io/dar_soc4001/slides/class_12/class_12#1) [`[.Rmd]`](slides/class_12/class_12.Rmd) [`[RScript]`](slides/class_12/class_12.R)[`[Grabación]`](https://zoom.us/rec/play/EehuQNGrwHxyC7Hx01wzZo_h2s5O487nSV17tAhIISYHnB2uhL4LMpD9UBnFSJrp2lSbIMqfbpgWqYPj.YuG8-Xrov8LyKHOd?continueMode=true)
 
 
 ### Evaluaciones 
