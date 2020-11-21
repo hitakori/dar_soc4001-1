@@ -1,6 +1,6 @@
 ---
 title: "Procesamiento avanzado de Bases de Datos en R"
-subtitle: "Introducción a bases de datos"
+subtitle: "Iteración y automatización"
 author: "<br> Mauricio Bucca<br> Profesor Asistente, Sociología UC"
 date: "[github.com/mebucca](https://github.com/mebucca)"
 output:
@@ -23,558 +23,186 @@ layout: false
 ## Recapitulación
 <br>
 
-- El universo R
+- Manipulación de bases de datos con `tidyr` y `dplyr`
 
-- Primeros pasos en R
+- Visualización de datos con `ggplot2`
+
 
 ---
 
 ## Hoy hablaremos de ...
 
-- Bases de datos en R
+Iteración y automatización: 
 
-- Listas
-
-- Manipulación de datos
-
-- Funciones basales
-
-- Visualización
+  - Loops
+  
+  - "Functional programming"
 
 ---
-
 class: fullscreen, left, middle, text-black
 background-image: url("images/typewriter.jpg")
 
-.huge[#Dataframes]
+.huge[#Loops]
 
 ---
-
-## Dataframes (bases de datos)
-
-
-- Dataframes es la forma convencional en que almacenamos datos en `R`. 
-
-- A diferencia de otros softwares estadísticos (e.g, `SPSS`, `SAS`,`Stata`), en `R` las bases de dato son un tipo de estructura de datos, entre muchos otros.
-
-  - Un dataframe es una matriz donde cada file es una "observación y cada columna es un "variable". 
-  
-  - En un dataframe cada elemento (o "variable") debe tener la misma longitud (mismo número de "observaciones").
-  
-  - A diferencia de una matriz, un dataframe puede abarcar cualquier mezcla de tipos de datos. 
-  
-  - Una gran ventaja de `R` es que permite trabajar simultáneamente con más de una base de datos (además de cualquier otro tipo de objeto).
-
----
-
-## Data frames (bases de datos)
-
-Asi se ve un dataframe en `R`:
-```{r, message=FALSE, warning=FALSE, echo=FALSE}
-head(iris,20) 
-```
-
----
-
-## Construir un data frame
-
-Un data frame requiere que los vectores sean de misma dimensión, pero no necesariamente del mismo tipo.
-
-.top-code[
-```{r dataframe, eval=FALSE}
-mydf <- data.frame(x=rep(c("A","B","C"),2),
-                   y=sample(1:10,size=6), 
-                   z=factor(sample(letters,size=6)))
-head(mydf)
-```
-]
-
---
-.pull-bottom[
-```{r dataframe-out, ref.label="dataframe", echo=FALSE}
-```
-]
-
----
-
-## Construir un data frame a partir de una matriz 
-
-Una matriz es una colección de vectores de la misma dimensión. Una base de datos es una matriz que permite diferentes tipos de datos (no sólo numéricos). 
-
-```{r}
-# vectores
-v1 <- sample(1:100,10)
-v2 <- sample(letters,10)
-
-# matriz a partir de vectores
-mymatrix <- cbind(v1,v2)
-
-# transformar una matriz en una base de datos
-as.data.frame(mymatrix) 
-```
-
----
-
-## Dar nombre a columnas y filas
-
-Data frames and matrices can have named rows and columns.
-
-```{r}
-# asigna nombre a columnas (en order)
-colnames(mydf) <- c("group_string","outcome_numeric","letters_factor") 
-names(mydf)
-
-# asigna nombre a filas: rownames(mydf)  
-```
---
-```{r, echo=FALSE}
-head(mydf)
-```
-
----
-
-
-## Cargar y guardar data frames desde un arhivo
-
-`R` funciona bien con archivos `.xls` y `.csv`, entre muchos otros. Muchos paquetes permiten la importación de otros formatos de datos (e.g., archivos `.dta`).
-
-**Cargando datos**
-
-```r
-setwd("ubicación de mi archivo")
-mydata <- read.csv('filename.csv', header=T)
-```
-
-**Guardando datos**
-
-```r
-setwd("ubicación donde quiero guarda mi archivo")
-write.csv(mydata, 'filename.csv')
-```
----
-
-## Cargar y guardar data frames desde un paquete
-
-Muchos paquetes de `R` incluyen data frames. Más aún, muchos paquetes de `R` son principalmente colecciones de datos (e.g., `datasets`,`essurvey`,`countyweather`. `carData`). Cargamos el paquete `datasets`.
-
-```{r}
-library("datasets")
-```
-
-Escribiendo `datasets::` en la consola de `RStudio` el auto-completador mostrará la lista de bases de datos disponibles, con una breve descripción. `datasets::morley`, por ejemplo, contiene datos sobre una serie de experimentos conducidos en 1879 para medir la velocidad de la luz. 
-
-```{r}
-data(morley) # carga datos en la memoria
-speed_of_light <- morley # asigna datos a un objeto de R
-head(speed_of_light)
-```
----
-
-## Listas
-
-Una lista es una colección arbitraria de objetos. Los elemento de una lista no tienen que ser del mismo tipo ni tener las mismas dimensiones.
-
-```{r}
-mylist <- list(year=1879, name="Michelson Speed of Light Data", data=head(speed_of_light)); mylist
-```
----
-
-## Acceder a elementos de una lista
-
-Utilizamos doble corchetepara acceder a cada elemento, o el operador `$`.
-```{r}
-mylist[[1]]
-mylist$data[1:2,2:3]
-```
-
----
-
-class: fullscreen,left, middle, text-black
-background-image: url("images/typewriter.jpg")
-
-.huge[#Manipulación]
-.huge[#de datos]
-
-
----
-
-## Datos del plesbiscito de 1989 en Chile. 
-
-En el paquete `carData` se encuentra una base de datos llamada "Chile". Esta base contiene datos de una encuenta realizada por FLACSO/Chile en Abril y Mayo de 1988 sobre intención de voto en el plesbiscito de 1989, junto con otras variables socio-demográficas.    
+## Loops: ¿para que?
 
 .pull-left[
-En lo que sigue vamos a usar esta base de datos para ejemplificar diferentes herramientas para la manipulación de datos en `R`.
+![for](forloop.jpg)
 ]
 
 .pull-right[
-![NO](images/franja_NO.jpg)
-]
-
----
-
-## Dimensiones 
-
-Para inspeccionar rapidamente una base de datos podemos usar las funciones `head()` and `tail()`. Para saber las dimensiones de una matriz o data frame (*rows*, *cols*) usamos la función `dim()`.
-
-```{r}
-# Carganos los datos de Chile
-library("carData")
-data("Chile") # datos "flotante"
-data_chile <- Chile; # crea dataframe
-rm(Chile) # remueve "flotante"
-head(data_chile) # muestra 6 primeras observaciones
-```
-
-```{r}
-# Inspeccionar dimensiones
-dim(data_chile)
-```
-
----
-
-## Seleccionar filas y columnas
-
-Filas y columnas se seleccionan usando corchetes cuadrados para "indexar" la posición que se quiere seleccionar. Por ejemplo, `data_chile[3,8]` corresponde a observación 3, varible 8:
-
-```{r row-col}
-data_chile[3,8]
-```
---
-
-Seleccionar una fila/columna entera dejando posición en blanco: 
-.pull-left[
-```{r, eval=FALSE}
-# todas las columnas de la fila 4
-head(data_chile[4,])
-```
-]
-
-.pull-right[
-```{r, eval=FALSE}
-# todas las filas de la columna 6
-head(data_chile[,6]) 
-```
-]
-
----
-
-## Más formas de seleccionar filas y columnas
-
-```r
-data_chile[-1,]                   # excluye primera fila
-data_chile[, -(2:4)]              # excluye columnas 2 a 4
-data_chile[, c("income","vote")]  # solo vars income and vote
-data_chile[c(1,5),'vote']         # variable voto para observaciones 1 y 5
-data_chile$vote                  # selecciona col vote
-```
-Ejemplo:
-```{r}
-dim(data_chile[-1,c("income","vote")]) # dimesion
-nrow(data_chile[-1,c("income","vote")]) # número de filas
-ncol(data_chile[-1,c("income","vote")]) # número de columnas
-```
----
-
-## Filtro de datos
-
-Y si sólo nos interesa una sub-muestra de votantes jóvenes que apoyan la opción SI?
-
-```{r}
-jovenes_pinochetistas <- data_chile[data_chile$age <= 35 & data_chile$vote=="Y",]
-head(jovenes_pinochetistas,15)
-```
-
----
-
-## Creación de nuevas variables y recodificación
-
-Para crear una nueva variable debemos asignarla al dataframe usando el operado `$`.
-
-```{r}
-data_chile$year <- 1988
-```
-
---
-
-
-También podemos crear nuevas variables en base a valores de variables existente. Aquí crearemos una variable de grupos de edad.
-
-```{r}
-data_chile$age_group <- NA
-data_chile$age_group[data_chile$age <=35] <- "Young"
-data_chile$age_group[data_chile$age > 35] <- "Old"
-```
-
-
---
-
-Detrás de la asignación condicional de valores hay una evaluación lógica.
-```{r}
-head(data_chile$age <= 35) 
-```
-
----
-
-## Manipulación de valores perdidos
-
-En un data frame los valores peridios aparecen como `NA`s. `NA`s son un tipo de dato.
-.left-code[
-```{r missing, eval=FALSE}
-  x <- c(1, NA, 2, 7, 8)
-  y <- c(NA, 1, 4, 7, 2)
-  df <- cbind(x, y)
-  
-  is.na(x) #<< 
-  x[!is.na(x)] #<< 
-  df[complete.cases(df),] #<<
-```
-]
-.pull-right[
-```{r missing-out, ref.label="missing", echo=FALSE}
-```
-]
-
----
-
-## Manipulación de valores perdidos
-
-Aplicado a los datos chilenos
-
-```{r}
-# datos como vienen
-dim(data_chile)
-
-# cuenta NA para una variable
-sum(!is.na(data_chile$vote))
-
-# datos completos
-dim(data_chile[complete.cases(data_chile),])
-```
-
----
-
-class: fullscreen,left, middle, text-black
-background-image: url("images/typewriter.jpg")
-
-.huge[#Funciones]
-.huge[#basales]
-
----
-
-## Resumen
-
-Resumen de datos o prácticamente cualquier objeto con la función `summary(x)`.
-
-```{r summary, width=60}
-summary(data_chile[,c("age","income","vote")])
-```
-
----
-
-## Estructura 
-
-Una mirada rápida a la estructura los datos `str(x)`
-
-```{r str}
-str(data_chile)
-```
-
----
-
-## Atributos
-
-Explorar el contenido de un objecto `attributes(x)`
-
-```{r attribute}
-attributes(data_chile[1:10,1:5])
-```
-
----
-
-## Tablas de contingencia 
-
-Tabulación rápica `table(x,y)`
-       
-.pull-left[
-```{r}
-mytable <- 
-table(data_chile$sex, data_chile$vote)
-mytable
-```
-]
-.pull-right[
-```{r}
-round(prop.table(mytable,margin=2),2)
-```
-]
+Explorar patrones comunes en código para:
 
 <br>
 
-La function `prop.table` transforma una tabla de frecuencias en una tabla de proporciones.
+- Reducir .bold[duplicación] de código 
+
+- Reducir posibilidades de .bold[errores] en código
+
+- Automatizar .bold[análisis] 
+
+- Automatizar .bold[almacenamiento y extracción] de resultados
+
+]
 
 ---
+## Loops: ¿para que?
 
-## Funciones básicas para vectores y variables
-
-```r
-sum()    # suma elementos
-mean()   # promedio
-sd()     # desviación estándar
-max()    # máximo
-which.max() # posición de valor máximo 
-min()    # mínimo
-which.min() # posición de valor mínimo 
-rank()   # ranking de valores
-median() # mediana
-range()  # rango
-rev()    # revertir elementos
-unique() # lista de elementos únicos
-length() # largo
-```
-Ejemplo,
 .pull-left[
-```{r}
-mean(data_chile$income)
-```
+
+- Hay muchos tipos de loops.
+
+
 ]
 
 .pull-right[
-```{r}
-mean(data_chile$income, na.rm = TRUE)
-```
-]
----
-
-class: fullscreen,left, middle, text-black
-background-image: url("images/typewriter.jpg")
-
-.huge[#Variables]
-.huge[#aleatorias]
-
----
-
-## Generación de variables aleatorias 
-
-Para todas las distribuciones estadísticas, `R` utiliza las siguiente nomenclatura:
-
-- `d*` = función de densidad/masa
-- `p*` = función de distribución acumulativa
-- `q*` = función de cuantiles
-- `r*` = generación de variaciones aleatorias
-
-Hay muchas disponibles en los paquetes basales de R. Ejecutar `?distributions` para ver una lista completa.
-
----
-
-## Generación de variables aleatorias normal
-
-.pull-left[
-```{r}
-my_normal <- rnorm(n=1000, mean=0, sd=1)
-matrix(my_normal,10,3)
-```
-]
-
-.pull-right[
-```{r, echo=FALSE}
-plot(density(my_normal))
-```
-]
-
----
-
-## Cuantiles
-
-.pull-left[
-```{r}
-# teórico
-qnorm(p=c(0.025,0.5,0.975), 
-      mean=0,sd=1)
-
-# empirico
-quantile(my_normal, 
-        p=c(0.025,0.975))
-```
-]
-
-.pull-right[
-```{r, echo=FALSE}
-plot(density(my_normal))
-abline(v = qnorm(p=c(0.025,0.975), 
-      mean=0,sd=1), col="red")
-abline(v = quantile(my_normal, 
-        p=c(0.025,0.975)), col="blue")
-```
+![loops](loops.png)
 ]
 
 
 ---
-
-## Funciones básicas y variables aleatorias en prácticas
-
-Calculemos la desviación estándar de la variable que creamos ( $N(0,1)$ ). Para ello usaremos la siguiente fórmula:
-
-$$\sigma = \sqrt{ \frac{\sum_{i=1}^{n} (x_{i} - \bar{x})^{2}}{n} }$$
-```{r}
-n        <- length(my_normal)
-mu_bar   <- mean(my_normal)
-dev2     <- (my_normal - mu_bar)^2
-sigma2   <- sum(dev2)/n
-sigma    <- sqrt(sigma2); sigma 
-```
-
----
-
-class: fullscreen,left, middle, text-black
-background-image: url("images/typewriter.jpg")
-
-.huge[#Loops e]
-.huge[#iteraciones]
-
----
-
 ## `for` loops
 
-con números
+Con números
 
-```{r}
+.pull-left[
+```{r forloop1, eval=FALSE}
 
-for(i in 1:5){
-  print( sqrt(i) + log(i) )
-}
+for(i in 1:20) {
+  
+  primo <- i + (i-1)
+  print(primo)
 
+  }
 ```
+]
+
+--
+.pull-right[
+```{r forloop1-out, ref.label="forloop1", echo=FALSE}
+```
+]
+
 
 ---
-
 ## `for` loops
 
-con strings
+Con letras
 
-```{r}
+.pull-left[
+```{r forloop2, eval=FALSE}
 
-list_words <- c("a","b","c","d")
+for(j in c("Tamara","Julio","Simona")) { #<<
+  
+  frase <- paste0(j, " participa en clases")
+  print(frase)
+  
+  }
+```
+]
 
-z <- NULL
-for (i in list_words) {
-  x <- paste(i,"!!", sep="")
-  z <- c(z,x)
-}    
-z
+--
+.pull-right[
+```{r forloop2-out, ref.label="forloop2", echo=FALSE}
+```
+]
+
+--
+
+.pull-left[
+```{r forloop3, eval=FALSE}
+
+nombres <- c("Tamara","Julio","Simona")
+
+for(n in nombres) { #<<
+  
+  frase <- paste0(n, " participa en clases")
+  print(frase)
+  
+  }
+```
+]
+
+--
+.pull-right[
+```{r forloop3-out, ref.label="forloop3", echo=FALSE}
+```
+]
+
+```{css, echo=FALSE}
+.pull-right ~ * { clear: unset; }
+.pull-right + * { clear: both; }
 ```
 
 ---
+## Nested Loops
 
-## `while` loops
+.pull-left[
+```{r forloop31, eval=FALSE}
 
-```{r}
-
-j=1
-while (j < 1000) {
-    print(j)
-    j = exp(j)/j
+for (i in  1:5) { #<<
+  for (j in c(3,4)) { #<<
+    
+  diff = i - j
+  print(diff) 
+  
+  }
 }
+```
+]
 
+--
+.pull-right[
+```{r forloop31-out, ref.label="forloop31", echo=FALSE}
+```
+]
+
+--
+
+.pull-left[
+```{r forloop32, eval=FALSE}
+
+for (j in c(3,4)) { #<<
+  for (i in  1:5) { #<<
+
+  diff = i - j
+  print(diff) 
+  
+  }
+}
+```
+]
+
+--
+.pull-right[
+```{r forloop32-out, ref.label="forloop32", echo=FALSE}
+```
+]
+
+```{css, echo=FALSE}
+.pull-right ~ * { clear: unset; }
+.pull-right + * { clear: both; }
 ```
 
 ---
@@ -583,131 +211,666 @@ while (j < 1000) {
 
 `if`, `else if`, `else`
 
-```{r}
-a <- 4
 
-if(a > 10){
+.pull-left[
+```{r forloop4, eval=FALSE}
+
+a <- 49
+
+if(a > 100){ #<<
+  
   print(":(")
-} else if (a < 2){
+
+} else if (a < 50){ #<<
+  
   print(":)")
-} else {
+
+  } else { #<<
+    
   print(":S")
-}
 
-```
+  }
 
----
-
-## Aplicaciones de loops, iteraciones y estructuras de control
-
-***Infinitas***: cualquier repeticion manual puede ser automatizada
-
-.lef-top[
-```{r loop, eval=FALSE}
-results <- NULL
-incomes <- sort(unique(Chile$income))
-
-for (i in incomes) {
-  subsample <- Chile[Chile$income==i,]
-  props <- prop.table(table(subsample$vote))["N"]
-  results <- c(results,props)
-}
-results 
 ```
 ]
 
 --
-.pull-bottom[
-```{r loop-out, ref.label="loop", echo=FALSE}
+.pull-right[
+```{r forloop4-out, ref.label="forloop4", echo=FALSE}
 ```
 ]
 
 ---
+## Estructuras de control + loops
 
-class: fullscreen,left, middle, text-black
+.pull-left[
+![fibo1](fibonacci.png)
+]
+
+
+.pull-right[
+![fibo2](fibonacci2.jpg)
+]
+
+---
+## Estructuras de control + loops + almacenamiento
+
+.pull-left[
+\begin{align}
+f_n = \begin{cases}
+n \quad & \text{si } n \geq 0 \text{ y } n \leq 1 \\ \\
+f_{n-2} + f_{n-1} \quad & \text{si } n > 1 
+\end{cases}
+\end{align}
+]
+
+.pull-right[
+
+]
+
+--
+
+.pull-left[
+```{r forloop5, eval=FALSE}
+f <- NULL #<<
+for (n in 0:12) {
+  
+  if (n == 0 | n == 1) { #<<
+    f[n+1] <- n #<<
+    print(f)
+  }
+  
+  else if (n > 1){ #<<
+    f[n+1] <- f[(n+1)-1] + f[(n+1)-2] #<<
+    print(f)
+  }
+
+}
+```
+]
+
+--
+
+.pull-right[
+```{r forloop5-out, ref.label="forloop5", echo=FALSE}
+```
+]
+
+```{css, echo=FALSE}
+.pull-right ~ * { clear: unset; }
+.pull-right + * { clear: both; }
+```
+
+---
+## `while` loops
+
+
+.pull-left[
+```{r while1, eval=FALSE}
+
+j=0
+while (j < 1000000000) { #<<
+    print(j)
+    j=(j+1)^2 #<<
+}
+```
+]
+
+--
+.pull-right[
+```{r while1-out, ref.label="while1", echo=FALSE}
+```
+]
+
+--
+.bold[Cuidado!]
+
+.pull-left[
+```{r, eval=FALSE}
+j=1
+while (j < 2) { #<<
+  j = j/j 
+}
+```
+]
+
+.pull-right[
+![scream](images/scream.gif)
+]
+```{css, echo=FALSE}
+.pull-right ~ * { clear: unset; }
+.pull-right + * { clear: both; }
+```
+
+---
+class: inverse, center, middle
+
+## Loops: algunas aplicaciones para análisis de datos
+
+---
+## Datos Covid-19
+
+Continuaremos trabajando con datos mundiales de COVID (OWID):
+
+```{r, echo=FALSE, message=F, warning=F}
+library("tidyverse")
+library("broom")
+library("viridis")
+
+
+setwd(
+  "~/Library/Mobile Documents/com~apple~CloudDocs/Teaching/ISUC/2020_2_data_analysis_r/repo/slides/class_12/")
+
+# leer archivo csv
+covid_data <- read_delim("covid_data.csv", delim=";")
+
+covid_data <- covid_data %>% filter(date==as.Date("2020-11-17")) 
+covid_data  %>% glimpse()
+
+```
+
+---
+## Análisis de datos Covid-19, manualmente
+
+- Variables dependientes (y): `total_cases_per_million`, `total_deaths_per_million`
+
+- Predictores (x): `population_density` `median_age`, `gdp_per_capita`
+
+<br>
+
+.bold[Instrucciones]:
+
+1. Crea un scatterplot de cada (y) con cada x
+
+2. Regresiona cada (y) con cada (x)
+
+3. Extrae el $R^2$ de cada modelo
+  
+
+---
+## Análisis de datos Covid-19, manualmente
+
+- Variables dependientes (y): `total_cases_per_million`, `total_deaths_per_million`
+
+- Predictores (x): `population_density` `median_age`, `gdp_per_capita`
+
+<br>
+
+.bold[Instrucciones]:
+
+1. Regresiona cada (y) con cada (x), guarda el modelo
+
+2. Extrae el $R^2$ de cada modelo
+
+
+<br>
+--
+
+```{r, eval=F}
+lm1 <- lm(total_cases_per_million ~ population_density, data=covid_data) #<<
+r2_1 <- summary(lm1)$r.squared #<<
+
+lm2 <- lm(total_cases_per_million ~ median_age, data=covid_data)
+r2_2 <- summary(lm2)$r.squared
+
+... ETC, ETC, ETC, ETC!!! #<<
+
+```
+
+---
+## Análisis de datos Covid-19 usando loops
+
+.bold[Instrucciones]:
+
+1. Regresiona cada (y) con cada (x), guarda el modelo
+2. Extrae el $R^2$ de cada modelo
+
+<br>
+--
+
+```{r, eval=FALSE}
+for (dv in c("total_cases_per_million", "total_deaths_per_million")) {
+  for (iv in  c("population_density", "median_age", "gdp_per_capita")) {
+    
+    #ajusta modelo
+    y <- covid_data[,dv] %>% as.matrix()
+    x <- covid_data[,iv] %>% as.matrix()
+    mimodelo <- lm(y ~ x) #<<
+   
+    #r2 
+    mir2 <- summary(mimodelo)$r.squared; print(mir2) #<<
+  }
+}
+```
+---
+## Análisis de datos Covid-19 usando loops
+
+.bold[Instrucciones]:
+
+1. Regresiona cada (y) con cada (x), guarda el modelo
+3. Extrae el $R^2$ de cada modelo
+
+<br>
+
+```{r, echo=FALSE}
+for (dv in c("total_cases_per_million", "total_deaths_per_million")) {
+  for (iv in  c("population_density", "median_age", "gdp_per_capita")) {
+    
+    #ajusta modelo
+    y <- covid_data[,dv] %>% as.matrix()
+    x <- covid_data[,iv] %>% as.matrix()
+    mimodelo <- lm(y ~ x)
+   
+    #r2 
+    mir2 <- summary(mimodelo)$r.squared ; print(mir2) 
+  }
+}
+```
+
+---
+## Análisis de datos Covid-19 usando loops + almacenamiento resultados via `assign()`
+
+```{r, eval=FALSE}
+for (dv in c("total_cases_per_million", "total_deaths_per_million")) {
+  for (iv in  c("population_density", "median_age", "gdp_per_capita")) {
+    
+    #ajusta modelo
+    y <- covid_data[,dv] %>% as.matrix()
+    x <- covid_data[,iv] %>% as.matrix()
+    mimodelo <- lm(y ~ x)
+    namemodelo <- paste("lm_",dv,"_"iv) #<<
+    assign(namemodelo,mimodelo ) #<<
+      
+    #r2 
+    mir2 <- summary(mimodelo)
+    namer2 <- paste("r2_",dv,"_"iv) #<<
+    assign(namer2,mir2) #<<
+
+  }
+}
+```
+
+---
+## Análisis de datos Covid-19 usando loops 
+
+
+.pull-left[
+![boss](https://media1.tenor.com/images/096ff1a1434247ee4af566e41d3b21a1/tenor.gif?itemid=5874416)
+]
+.pull-right[
+.bold[Ahora hagamos estos análisis por separado para cada continente ...]
+]
+
+<br>
+--
+
+2 variables dependientes, 3 variables independientes, 2 análisis distintos, 6 continentes = ...
+
+--
+
+.bold[48 repeticiones] de los mismo ...
+
+--
+
+Una posible solución: agregar un nivel adicional al loop (continentes)
+
+---
+class: fullscreen, left, middle, text-black
 background-image: url("images/typewriter.jpg")
 
-.huge[#Visualización]
-.huge[#de]
-.huge[#datos]
+.huge[#A breve]
+.huge[#introducción]
+.huge[#a purrr]
+
 
 ---
+class: center, middle
 
-## Scatterplots
-.pull-left[
-```{r points, fig.show = 'hide', fig.retina = 3}
-plot(log(incomes), results, 
-     xlab="log(ingresos)", 
-     ylab="% voto NO",
-     type="p",  
-     pch=16, 
-     ylim = c(0.25,0.45), 
-     col="red")
-```
-]
-.pull-right[
-```{r ref.label = 'points', echo = FALSE}
-```
-]
+![](images/tidyverse_packs.png)
 
 ---
+## purrr: funciones para iteración 
 
-## Lineas
-.pull-left[
-```{r lines, fig.show = 'hide', fig.retina = 3}
-plot(log(incomes), results, 
-     xlab="log(ingresos)", 
-     ylab="% voto NO", 
-     type="l", 
-     ylim = c(0.25,0.45), col="red")
-
-points(log(incomes), results, #<<
-       col="blue", pch=16) #<<
-```
-]
-.pull-right[
-```{r ref.label = 'lines', echo = FALSE}
-```
-]
----
-
-## Histogramas
+<br>
 
 .pull-left[
-```{r hist, fig.show = 'hide', fig.retina = 3}
-par(mar=c(5,4,1,1), bg='white')
-hist(Chile$income, main="", 
-     xlab="Income",
-     col="orange")
-```
+  ![purrr](purrr.png)
 ]
-.pull-right[
-```{r ref.label = "hist", echo = FALSE}
-```
-]
----
 
-## Bar plots
+.pull-right[
+
+- Iteración
+
+- Herramientas de "functional programming" 
+
+]
+
+
+---
+## purrr: `map()`
+
+La función básica de `purrr` es `map()`:  aplica la misma acción/función a cada elemento de un objeto.
+
+<br>
+
+.bold[Input]:
+
+- un vector
+
+- una lista
+
+- una base de datos
+
+<br>
+--
+
+.bold[Output]:
+
+
+- `map(.x, .f)` devuelve una lista
+
+- `map_df(.x, .f)` devuelve una base de datos
+
+- `map_dbl(.x, .f)` devuelve un número
+
+
+---
+## purrr: `map()`
 
 .pull-left[
-```{r bar, fig.show = 'hide', fig.retina = 3}
-barplot(table(Chile$education),
-        ylim = c(0,2000),
-    col="purple")
-
-box() #<<
+```{r purrr1, eval=FALSE}
+mydata <- tibble(x=rnorm(30),y=rnorm(30))
+mydata %>% head()
 ```
 ]
+
 .pull-right[
-```{r ref.label = "bar", echo = FALSE}
+```{r purrr1-out, ref.label="purrr1", echo=FALSE}
+```
+]
+
+
+--
+
+.pull-left[
+```{r purrr2, eval=FALSE}
+sum_plus10 <- function(x) {sum(x) + 10}
+
+map(.x=mydata, .f=sum_plus10 ) #<<
+```
+]
+
+--
+.pull-right[
+```{r purrr2-out, ref.label="purrr2", echo=FALSE}
+```
+]
+
+
+```{css, echo=FALSE}
+.pull-right ~ * { clear: unset; }
+.pull-right + * { clear: both; }
+```
+
+---
+## purrr: `map()`
+
+.pull-left[
+```{r purrr3, eval=FALSE}
+mydata <- tibble(x=rnorm(30),y=rnorm(30))
+mydata %>% head()
+```
+]
+
+.pull-right[
+```{r purrr3-out, ref.label="purrr3", echo=FALSE}
+```
+]
+
+
+--
+
+.pull-left[
+```{r purrr4, eval=FALSE}
+sum_plus10 <- function(x) {sum(x) + 10}
+
+map_df(.x=mydata, .f=sum_plus10 ) #<<
+```
+]
+
+--
+.pull-right[
+```{r purrr4-out, ref.label="purrr4", echo=FALSE}
+```
+]
+
+
+```{css, echo=FALSE}
+.pull-right ~ * { clear: unset; }
+.pull-right + * { clear: both; }
+```
+
+---
+## purrr: `map()`
+
+.pull-left[
+```{r purrr5, eval=FALSE}
+mydata <- tibble(x=rnorm(30),y=rnorm(30))
+mydata %>% head()
+```
+]
+
+.pull-right[
+```{r purrr5-out, ref.label="purrr5", echo=FALSE}
+```
+]
+
+
+--
+
+.pull-left[
+```{r purrr6, eval=FALSE}
+
+map_df(.x=mydata, .f= ~ sum(.x) + 10  ) #<<
+```
+]
+
+--
+.pull-right[
+```{r purrr6-out, ref.label="purrr6", echo=FALSE}
+```
+]
+
+
+```{css, echo=FALSE}
+.pull-right ~ * { clear: unset; }
+.pull-right + * { clear: both; }
+```
+
+
+---
+## Análisis de datos Covid-19 con `purrr`
+
+Volviendo a nuestro problema inicial:
+
+- Variables dependientes (y): `total_cases_per_million`, `total_deaths_per_million`
+
+- Predictores (x): `population_density` `median_age`, `gdp_per_capita`
+
+
+
+<br>
+--
+
+
+.bold[Instrucciones]: Regresiona cada (y) con cada (x) y guarda el modelo, luego extrae el $R^2$ de cada modelo, 
+
+Un modelo regresión por continente:
+
+--
+
+.pull-left[
+```{r purrr7, eval=FALSE, warning=F} 
+
+fit_lm <- covid_data  %>% nest(-continent) %>%
+  mutate(
+    fit = map(data, ~ lm(total_cases_per_million ~ median_age, data = .x)) #<<
+  ) 
+fit_lm
+```
+]
+
+
+--
+.pull-right[
+```{r purrr7-out, ref.label="purrr7", echo=FALSE,  warning=F}
 ```
 ]
 
 ---
+## Análisis de datos Covid-19 con `purrr`
 
-## En la próxima clase ... 
 
-- Taller #1: primer acercamiento a bases de datos en R (CASEN 2017)
+.bold[Instrucciones]: Regresiona cada (y) con cada (x) y guarda el modelo, luego extrae el $R^2$ de cada modelo, 
+
+Ahora .bold[extraemos] los coefficientes del modelo con la función `broom::tidy()`
+
+--
+
+```{r purrr9, eval=FALSE, warning=F} 
+fit_lm <- fit_lm %>% mutate(coefs = map(fit, tidy)) #<<
+fit_lm
+```
+
+
+--
+
+```{r purrr9-out, ref.label="purrr9", echo=FALSE,  warning=F}
+```
+
+---
+## Análisis de datos Covid-19 con `purrr`
+
+
+.bold[Instrucciones]: Regresiona cada (y) con cada (x) y guarda el modelo, luego extrae el $R^2$ de cada modelo, 
+
+Ahora .bold[extraemos] los coefficientes del modelo con la función `broom::tidy()`
+
+--
+
+```{r purrr91, eval=FALSE, warning=F} 
+fit_lm <- fit_lm %>% mutate(coefs = map(fit, tidy))
+fit_lm %>% select(continent,coefs) %>% unnest() #<<
+```
+
+
+--
+
+```{r purrr91-out, ref.label="purrr91", echo=FALSE,  warning=F}
+```
+
+---
+## Análisis de datos Covid-19 con `purrr`
+
+
+- Nuestro código sólo considera las variables  `total_cases_per_million` y  `median_age`.
+
+--
+
+
+- .bold[Problema:] ¿Como hacemos para iterar sobre par (x)-(y) de variables dependientes e independientes? 
+
+
+<br>
+--
+
+```{r purrr92, eval=FALSE, warning=F} 
+
+covid_data <- covid_data %>% 
+  dplyr::select(continent,location,total_cases_per_million, #<<
+                total_deaths_per_million, population_density,median_age, gdp_per_capita) %>%
+  pivot_longer(c(total_cases_per_million,total_deaths_per_million), #<<
+               names_to="dv", values_to="y") %>% 
+   pivot_longer(c(population_density,median_age,gdp_per_capita), #<<
+                names_to="iv", values_to="x")  
+
+covid_data
+```
+
+
+---
+## Análisis de datos Covid-19 con `purrr`
+
+
+```{r purrr92-out, ref.label="purrr92", echo=FALSE,  warning=F}
+```
+
+---
+## Análisis de datos Covid-19 con `purrr`
+
+
+```{r purrr93, eval=FALSE, warning=F} 
+
+fit_lm <- covid_data %>% nest(-c(continent,dv,iv)) %>% #<<
+  mutate(
+    fit = map(data, ~ lm(y ~ x, data = .x))
+  ) 
+fit_lm
+```
+
+```{r purrr93-out, ref.label="purrr93", echo=FALSE,  warning=F}
+```
+---
+## Análisis de datos Covid-19 con `purrr`
+
+
+```{r purrr94, eval=FALSE, warning=F} 
+
+fit_lm <- covid_data %>% group_by(continent,dv,iv) %>% nest() %>%
+  mutate(fit = map(data, ~ lm(y ~ x, data = .x))) %>% 
+  mutate(coefs = map(fit, tidy)) #<<
+  
+fit_lm
+```
+
+```{r purrr94-out, ref.label="purrr94", echo=FALSE,  warning=F}
+```
+
+---
+## Análisis de datos Covid-19 con `purrr`
+
+
+```{r purrr95, eval=FALSE, warning=F} 
+
+fit_lm <- covid_data %>% group_by(continent,dv,iv) %>% nest() %>%
+  mutate(fit = map(data, ~ lm(y ~ x, data = .x))) %>% 
+  mutate(coefs = map(fit, tidy)) %>% 
+  dplyr::select(continent,dv,iv,coefs) %>% #<<
+  unnest() #<<
+  
+fit_lm
+```
+
+```{r purrr95-out, ref.label="purrr95", echo=FALSE,  warning=F}
+```
+
+---
+## Análisis de datos Covid-19 con `purrr`
+
+
+```{r purrr96, eval=FALSE, warning=F, fig.height=5, fig.width=10} 
+
+fit_lm %>% filter(term=="x") %>%   #<<
+  ggplot(aes(x=continent, y=estimate, fill=continent)) +   #<<
+  geom_col() + facet_wrap(dv ~ iv, scales="free_y") +
+  scale_fill_viridis_d() +
+  theme_bw()
+
+```
+
+```{r purrr96-out, ref.label="purrr96", echo=FALSE,  warning=F, fig.height=5, fig.width=10}
+```
+
 
 ---
 
