@@ -41,6 +41,9 @@ Este repositorio contiene el material del curso SOC4001 Procesamiento Avanzado d
 - Clase 12: 19/11, 18:00 a 20:50, **Visualización de datos con ggplot (2)**: [`[Presentación]`](https://mebucca.github.io/dar_soc4001/slides/class_12/class_12#1) [`[.Rmd]`](slides/class_12/class_12.Rmd) [`[RScript]`](slides/class_12/class_12.R)[`[Grabación]`](https://zoom.us/rec/play/EehuQNGrwHxyC7Hx01wzZo_h2s5O487nSV17tAhIISYHnB2uhL4LMpD9UBnFSJrp2lSbIMqfbpgWqYPj.YuG8-Xrov8LyKHOd?continueMode=true)
 
 
+- Clase 13: 21/11, 09:00 a 11:50, **Iteración y automatización**: [`[Presentación]`](https://mebucca.github.io/dar_soc4001/slides/class_13/class_13#1) [`[.Rmd]`](slides/class_13/class_13.Rmd) [`[RScript]`](slides/class_13/class_13.R)
+
+
 ### Evaluaciones 
 
 #### Tareas 
@@ -48,7 +51,7 @@ Este repositorio contiene el material del curso SOC4001 Procesamiento Avanzado d
 - 01/10, Asignación Tarea 1: [`[PDF]`](homework/t_1.pdf)[`[Solución]`](homework/t_1_answers.pdf)
 - 08/10, Asignación Tarea 2: [`[PDF]`](homework/t_2.pdf)[`[Solución]`](homework/t2_answers.zip)  
 - 22/10, Asignación Tarea 3: [`[PDF]`](homework/t_3.pdf)[`[Solución]`](homework/t_3_answers.pdf)
-- 07/11, Asignación Tarea 4: [`[PDF]`](homework/t_4.pdf)
+- 07/11, Asignación Tarea 4: [`[PDF]`](homework/t_4.pdf)[`[Solución]`](homework/t_4_answers.pdf)
 - 07/11, Asignación Tarea 5: [`[PDF]`](homework/t_5.pdf)[`[Datos]`](slides/class_12/covid_data.csv)
 
 
