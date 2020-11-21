@@ -478,12 +478,12 @@ for (dv in c("total_cases_per_million", "total_deaths_per_million")) {
     y <- covid_data[,dv] %>% as.matrix()
     x <- covid_data[,iv] %>% as.matrix()
     mimodelo <- lm(y ~ x)
-    namemodelo <- paste("lm_",dv,"_"iv) #<<
+    namemodelo <- paste("lm_",dv,"_",iv) #<<
     assign(namemodelo,mimodelo ) #<<
       
     #r2 
     mir2 <- summary(mimodelo)
-    namer2 <- paste("r2_",dv,"_"iv) #<<
+    namer2 <- paste("r2_",dv,"_",iv) #<<
     assign(namer2,mir2) #<<
 
   }
@@ -826,7 +826,7 @@ fit_lm
 
 ```{r purrr94, eval=FALSE, warning=F} 
 
-fit_lm <- covid_data %>% group_by(continent,dv,iv) %>% nest() %>%
+fit_lm <- covid_data %>% nest(-c(continent,dv,iv)) %>%
   mutate(fit = map(data, ~ lm(y ~ x, data = .x))) %>% 
   mutate(coefs = map(fit, tidy)) #<<
   
@@ -842,7 +842,7 @@ fit_lm
 
 ```{r purrr95, eval=FALSE, warning=F} 
 
-fit_lm <- covid_data %>% group_by(continent,dv,iv) %>% nest() %>%
+fit_lm <- covid_data %>% nest(-c(continent,dv,iv)) %>%
   mutate(fit = map(data, ~ lm(y ~ x, data = .x))) %>% 
   mutate(coefs = map(fit, tidy)) %>% 
   dplyr::select(continent,dv,iv,coefs) %>% #<<
