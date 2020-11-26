@@ -147,7 +147,7 @@ for (i in d1) {
   }
 }
 
-ditrib_Y <- table(Y) %>% as_tibble() %>% mutate(p=round(n/sum(n),2)) %>% select(-n)
+ditrib_Y <- table(Y) %>% as_tibble() %>% mutate(p=round(n/sum(n),2)) %>% dplyr::select(-n)
 names(ditrib_Y) <- c("y","P(Y=y)") 
 knitr::kable(ditrib_Y, format = "markdown", align = 'lc')
 ```
@@ -366,7 +366,7 @@ Ejemplo con distribución normal:
 
 --
 
-- .bold[p]`norm`: función de densidad acumuluda 
+- .bold[p]`norm`: función de densidad acumulada 
 
 --
 
@@ -388,6 +388,7 @@ x %>% matrix(ncol = 1)
 ```
 ]
 
+--
 
 .pull-right[
 ```{r, fig.height=5}
@@ -409,6 +410,7 @@ x %>% matrix(ncol = 1)
 ```
 ]
 
+--
 
 .pull-right[
 ```{r, fig.height=5}
@@ -430,6 +432,7 @@ x %>% matrix(ncol = 1)
 ```
 ]
 
+--
 
 .pull-right[
 ```{r, fig.height=5}
@@ -451,6 +454,7 @@ x %>% matrix(ncol = 1)
 ```
 ]
 
+--
 
 .pull-right[
 ```{r, fig.height=5}
@@ -462,35 +466,9 @@ x %>% as_tibble() %>%
 ]
 
 ---
-## Inferencia para medidas de Asociación
+## Ejemplo: valor esperado y desviación estándar de variables aleatorias 
 
-O, sobre como podemos saber si nuestros resultados no son, o no, producidos por el mero azar.
-
---
-
-- Para responder esta pregunta debemos conocer la .bold[sampling distribution] de nuestro estimador, especialmente su _variabilidad_.
-
-- Los parámetros que "generan" los datos no varían pero nuestra estimaciones si: de muestra en muestra.
-
---
-
-<br>
-
-.bold[Caso canónico] es el _promedio muestral_, para el cual sabemos que: $\bar{X} \sim \mathcal{N}(\mu,\frac{\sigma}{\sqrt{n}})$
- - La desviación estándar del estimador (en este caso, $\frac{\sigma}{\sqrt{n}}$ ) es lo que denominamos .bold[error estándar (SE)].
-
---
-
- - Por qué? Si $x_1, \dots, x_n$ son _iid_, entonces:
-\begin{align}
-\mathbb{Var}\big(\bar{X}\big) &= \mathbb{Var}\Big(\frac{x_{i} + ... + x_{n}}{n}\Big) = \frac{1}{n^2} \Big(\mathbb{Var}(x_{i}) + ... + \mathbb{Var}(x_{n})\Big) \\
- &= \frac{1}{n^2}( \sigma^2 + ... + \sigma^2 ) = \frac{n\sigma^2}{n^2} = \frac{\sigma^2}{n} 
-\end{align}
-
----
-## Valor Esperado y Desviación de variables aleatorios, ejemplo
-
-Por ejemplo, supongamos que $X_{i}$ es la variable que resulta de tirar una moneda "justa". Participamos en un concurso que consiste en tirar la misma moneda 100 veces. El premio (G) es $ $1000$ de base más $ $10$ por cada "cara" obtenida ( $X_{i}=1$ ).
+Supongamos que $X_{i}$ es la variable que resulta de tirar una moneda "justa". Participamos en un concurso que consiste en tirar la misma moneda 100 veces. El premio (G) es $ $1000$ de base más $ $10$ por cada "cara" obtenida ( $X_{i}=1$ ).
 
 <br>
 --
@@ -592,9 +570,17 @@ $$\bar{X} \sim \mathcal{N}(\mu,\frac{\sigma}{\sqrt{n}})$$
  - La desviación estándar del estimador (en este caso, $\frac{\sigma}{\sqrt{n}}$ ) es lo que denominamos .bold[error estándar (SE)].
 
 
+<br>
+<br>
+--
+
+.bold[¿De donde viene este resultado?] ....
+
+
 ---
 ##"Sampling distribution" de la media muestral
 
+--
 
 - Dado $\bar{X}= \frac{x_1 + x_2 + \dots + x_{n}}{n}$, donde $x_1, \dots, x_n$ vars independientes y con misma distribución 
 
@@ -649,26 +635,11 @@ Podemos usar este resultado para construir un intervalo de confianza para $\bar{
 
 .bold[Nota importante]: cuando no conocemos los _verdaderos_ parámetros (casi siempre!), reemplazamos por sus valores estimados en la muestra.
 
----
-##"Sampling distribution" de una proporción
-
-.bold[Ilustración via Monte Carlo simulation]
-
-```{r}
-# Theoretical parameters of Bernoulli random variable X: "tosing a coin"
-p = 0.35
-
-# Our sample: a random sample of 500 coin toses 
-n = 500
-our_sample <- rbinom(n,size=1,prob=p); our_sample %>% glimpse()
-p_hat <- mean(our_sample); p_hat
-
-```
 
 ---
-##"Sampling distribution" de la media muestral
+##Ejemplo: "sampling distribution" de la media muestral
 
-Ejemplo, retomando CASEN 2007, variable `y = log(ytotcor)`:
+Retomando CASEN 2007, variable `y = log(ytotcor)`:
 
 
 ```{r, echo=FALSE, message=F, warning=F}
@@ -685,7 +656,7 @@ data_casen_csv <- data_casen_csv %>% mutate(y = log(ytotcor)) %>% drop_na(y)
 ```
 
 .pull-left[
-Media y desviación estándar en muestra:
+.bold[Media y desviación estándar en muestra]:
 ]
 
 .pull-right[
@@ -697,7 +668,7 @@ stats <- c(mu= mean(data_casen_csv$y), sd= sd(data_casen_csv$y)); stats
 --
 
 .pull-left[
-Error estándard de la media:
+.bold[Error estándard de la media]:
 ]
 
 .pull-right[
@@ -709,12 +680,13 @@ summary(lm(data_casen_csv$y ~ 1))$coefficients
 --
 
 .pull-left[
-Inferencia teórica: 
+.bold[Inferencia teórica]: 
 ]
 
 .pull-right[
 ```{r, message=F, warning=F}
-se = stats["sd"]/sqrt(length(data_casen_csv$y)); se 
+n = length(data_casen_csv$y)
+se = stats["sd"]/sqrt(n); se 
 ci = stats["mu"] + c(-1.96,1.96)*se; ci
 ```
 ]
@@ -722,12 +694,12 @@ ci = stats["mu"] + c(-1.96,1.96)*se; ci
 --
 
 .pull-left[
-Inferencia via simulación en `R`: 
+.bold[Inferencia via simulación en] `R`: 
 
 ]
 
 .pull-right[
-[click aquí](https://github.com/mebucca/dar_soc4001/blob/master/slides/class_14/class_14.Rmd)
+[click aquí](https://github.com/mebucca/dar_soc4001/blob/master/slides/class_14/class_14.R)
 ]
 
 ```{css, echo=FALSE}
