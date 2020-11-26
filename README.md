@@ -44,6 +44,8 @@ Este repositorio contiene el material del curso SOC4001 Procesamiento Avanzado d
 - Clase 13: 21/11, 09:00 a 11:50, **Iteración y automatización**: [`[Presentación]`](https://mebucca.github.io/dar_soc4001/slides/class_13/class_13#1) [`[.Rmd]`](slides/class_13/class_13.Rmd) [`[RScript]`](slides/class_13/class_13.R)[`[Grabación]`](https://zoom.us/rec/play/h_Uns73BgkiQTXF_uNdVq0NniQ5zupNPib_WduttnIURCQaMT3viBz5Q2ohm1C5N2Wi4uaDjD-CHUhFR.MKBMOkIaW5HJYrqF?continueMode=true)
 
 
+- Clase 14: 26/11, 18:00 a 20:50, **Simulación e inferencia estadística**: [`[Presentación]`](https://mebucca.github.io/dar_soc4001/slides/class_14/class_14#1) [`[.Rmd]`](slides/class_14/class_14.Rmd) [`[RScript]`](slides/class_14/class_14.R)
+
 
 ### Evaluaciones 
 
