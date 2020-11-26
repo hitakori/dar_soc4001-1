@@ -41,6 +41,18 @@ for (dv in c("total_cases_per_million", "total_deaths_per_million")) {
 
 # Purrr
 
+
+covid_data <- covid_data %>% 
+  dplyr::select(continent,location,total_cases_per_million, 
+                total_deaths_per_million, population_density,median_age, gdp_per_capita) %>%
+  pivot_longer(cols=c(total_cases_per_million,total_deaths_per_million), 
+               names_to="dv", values_to="y") %>% 
+  pivot_longer(c(population_density,median_age,gdp_per_capita), 
+               names_to="iv", values_to="x")  
+
+covid_data
+
+
 fit_lm <- covid_data %>% group_by(continent,dv,iv) %>% nest() %>%
   mutate(fit = map(data, ~ lm(y ~ x, data = .x))) %>% 
   mutate(coefs = map(fit, tidy)) %>% 
